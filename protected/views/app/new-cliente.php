@@ -2,15 +2,15 @@
 <div class="modal fade new-cliente" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
     <div class="modal-dialog modal-md">
         <div class="modal-content">
-
+            
             <div class="modal-header">
                 <button aria-label="Close" data-dismiss="modal" class="close" type="button">
                     <span aria-hidden="true"><i class="ion-android-close"></i></span>
-                </button> 
+                </button>
                 <h4 id="mySmallModalLabel" class="modal-title">
                     <?php echo t("Cliente") ?>
-                </h4> 
-            </div>  
+                </h4>
+            </div>
 
             <div class="modal-body">
 
@@ -95,7 +95,27 @@
                                 ))
                                 ?>
                             </div>
-                        </div> <!--row-->        
+                        </div> <!--row-->
+                        <div class="row top10">
+                            <div class="col-md-6 ">
+                                <?php
+                                echo CHtml::passwordField('password', '', array(
+                                    'placeholder' => t("Contraseña"),
+                                    'data-validation' => 'required',
+                                    'class' => "validate,"
+                                ))
+                                ?>
+                            </div>
+                            <div class="col-md-6 ">
+                                <?php
+                                 echo CHtml::passwordField('cpassword', '', array(
+                                    'placeholder' => t("Confirmar contraseña"),
+                                    'data-validation' => 'required',
+                                    'class' => "validate,"
+                                ))
+                                ?>
+                            </div>
+                        </div> <!--row-->
 
                         <div class="row top20">
                             <div class="col-md-12">

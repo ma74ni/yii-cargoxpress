@@ -2391,7 +2391,13 @@ class AjaxController extends CController {
 
     public function actionaddCliente() {
 
-        $DbExt = new DbExt;
+        if ($this->data['cpassword'] != $this->data['password']) {
+            $this->msg = t("Password de confirmación no concuerda");
+            $this->jsonResponse();
+            Yii::app()->end();
+        }
+
+        $dbExt = new DbExt;
         $params = array(
             'nombre' => isset($this->data['nombre']) ? $this->data['nombre'] : '',
             'apellido' => isset($this->data['apellido']) ? $this->data['apellido'] : '',
@@ -2400,58 +2406,45 @@ class AjaxController extends CController {
             'prefijo' => isset($this->data['prefijo']) ? $this->data['prefijo'] : '',
             'status' => isset($this->data['status']) ? $this->data['status'] : '',
             'empresa' => isset($this->data['empresa']) ? $this->data['empresa'] : '',
+            'password' => isset($this->data['password']) ? $this->data['password'] : '',
             'date_created' => AdminFunctions::dateNow(),
             'ip_address' => $_SERVER['REMOTE_ADDR']
         );
 
-
-        if (!isset($this->data['id_cliente'])) {
-            $this->data['id_cliente'] = '';
+        if ($res = AdminFunctions::getClienteByEmail($this->data['email'])) {
+            $this->msg = Driver::t("Cliente con ese correo electónico, ya existe.");
+            $this->jsonResponse();
+            Yii::app()->end();
         }
 
-        if (is_numeric($this->data['id_cliente'])) {
-            unset($params['date_created']);
-            $params['date_modified'] = AdminFunctions::dateNow();
-            if ($DbExt->updateData("{{clientes}}", $params, 'id_cliente', $this->data['id_cliente'])) {
+        $token = md5(AdminFunctions::generateCode(10));
+        $verificationCode = AdminFunctions::generateNumericCode(5);
+        $params['token'] = $token;
+        $params['verification_code'] = $verificationCode;
+        $password = $this->data['cpassword'];
+
+        $encryptionType = Yii::app()->params->encryption_type;
+
+        if (empty($encryptionType)) {
+            $encryptionType = 'yii';
+        }
+
+        if ($encryptionType == "yii") {
+            $params['password'] = CPasswordHelper::hashPassword($params['password']);
+        } else {
+            $params['password'] = md5($params['password']);
+        }
+
+        if ($dbExt->insertData('{{clientes}}', $params)) {
+            $params['password'] = $password;
+            if (AdminFunctions::sendRegistroCliente($params)) {
                 $this->code = 1;
                 $this->msg = Driver::t("Operación exitosa");
-                $this->details = 'new-cliente';
-
-                /* update team */
-                //Driver::updateTeamDriver($this->data['id'],$params['team_id']);
-            } else
-                $this->msg = Driver::t("Error al actualizar");
+            } else {
+                $this->msg = t("Cliente creado, No se pudo enviar el mail de registro");
+            }
         } else {
-            if ($res = AdminFunctions::getClienteByEmail($this->data['email'])) {
-                $this->code = 0;
-                $this->msg = Driver::t("El email ya existe en el Sistema, usuario no creado");
-                $this->jsonResponse();
-            }
-
-            $token = md5(AdminFunctions::generateCode(10));
-            $verification_code = AdminFunctions::generateNumericCode(5);
-            $params['token'] = $token;
-            $params['verification_code'] = $verification_code;
-            $password = AdminFunctions::generateNumericCode(5);
-            $encryption_type = Yii::app()->params->encryption_type;
-            if (empty($encryption_type)) {
-                $encryption_type = 'yii';
-            }
-
-            if ($encryption_type == "yii") {
-                $params['password'] = CPasswordHelper::hashPassword($password);
-            } else
-                $params['password'] = md5($password);
-
-            if ($DbExt->insertData('{{clientes}}', $params)) {
-                $params['password'] = $password;
-                if (AdminFunctions::sendRegistroCliente($params)) {
-                    $this->code = 1;
-                    $this->msg = Driver::t("Operación exitosa");
-                } else
-                    $this->msg = t("Cliente creado, No se pudo enviar el mail de registro");
-            } else
-                $this->msg = Driver::t("Error al insertar");
+            $this->msg = Driver::t("Error al insertar");
         }
         $this->jsonResponse();
     }

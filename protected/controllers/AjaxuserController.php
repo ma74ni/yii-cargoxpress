@@ -415,7 +415,9 @@ class AjaxuserController extends CController {
     public function actiongetEditOrden() {
         $this->actiongetDetalleOrden();
     }
-    
+    public function actiongetClipboardOrden() {
+        $this->actiongetDetalleOrden();
+    }
 
     public function actionAddOrden() {
 
