@@ -44,19 +44,17 @@ $this->renderPartial('/tpl/menuUser', array(
                 <?php echo CHtml::hiddenField('action', 'misContactosList') ?>
                 <table id="table_list" class="table table-hover">
                     <thead>
-                        <tr>     
-                            <th><?php echo t("Identificación") ?></th>
+                        <tr>
                             <th><?php echo t("Empresa") ?></th>
-                            <th><?php echo t("Email") ?></th>
                             <th><?php echo t("Ciudad") ?></th>
                             <th><?php echo t("Dirección") ?></th>
                             <th><?php echo t("Sector") ?></th>
-                            <th><?php echo t("Contacto") ?></th>    
-                            <th width="10%"></th>
+                            <th><?php echo t("Contacto") ?></th>
+                            <th></th>
                         </tr>
                     </thead>
-                    <tbody>     
-                    </tbody>     
+                    <tbody>
+                    </tbody>
                 </table>
             </form>
         </div>

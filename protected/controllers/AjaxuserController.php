@@ -571,9 +571,7 @@ class AjaxuserController extends CController {
 
     public function actionmisContactosList() {
         $aColumns = array(
-            'identificacion',
             'empresa',
-            'email',
             'l.nombre',
             'direccion',
             'z.zona',
@@ -641,9 +639,7 @@ class AjaxuserController extends CController {
                 $action .= "</div>";
 
                 $feed_data['aaData'][] = array(
-                    $val['identificacion'],
                     $val['empresa'],
-                    $val['email'],
                     $val['ciudad'],
                     $val['direccion'],
                     $val['sector'],
@@ -795,12 +791,11 @@ class AjaxuserController extends CController {
 
         $DbExt = new DbExt;
         $req = array(
-            'identificacion' => Driver::t("Por favor ingrese identificación"),
             'ciudad_id_n' => Driver::t("Por favor ingrese ciudad"),
         );
         $Validator = new Validator;
         $Validator->required($req, $this->data);
-        if ($Validator->validate() && $this->data['zona'] != '0') {
+        if ($Validator->validate()) {
 
             $params = array(
                 'identificacion' => isset($this->data['identificacion']) ? $this->data['identificacion'] : '',
@@ -824,8 +819,9 @@ class AjaxuserController extends CController {
                     if ($DbExt->updateData("{{contactos}}", $params, 'contacto_id', $this->data['contacto_id'])) {
                         $this->code = 1;
                         $this->msg = Driver::t("Operación exitosa");
-                    } else
+                    } else{
                         $this->msg = Driver::t("Problema al actualizar");
+                    }
                 } else {
 
                     if ($DbExt->insertData("{{contactos}}", $params)) {
@@ -833,14 +829,16 @@ class AjaxuserController extends CController {
 
                         $this->code = 1;
                         $this->msg = Driver::t("Operación exitosa");
-                    } else
+                    } else {
                         $this->msg = Driver::t("Error al insertar");
+                    }
                 }
             } catch (Exception $e) {
                 $this->msg = $e->getMessage();
             }
-        } else
+        } else {
             $this->msg = $Validator->getErrorAsHTML();
+        }
         $this->jsonResponse();
     }
 

@@ -6,15 +6,12 @@
             <div class="modal-header">
                 <h4 id="myLargeModalLabel" class="modal-title">
                     <?php echo t("Contacto") ?>
-                </h4> 
+                </h4>
                 <button aria-label="Cerrar" data-dismiss="modal" class="close" type="button">
                     <span aria-hidden="true"><i class="ion-android-close"></i></span>
-                </button> 
-
-            </div>  
-
+                </button>
+            </div>
             <div class="modal-body">
-
                 <form id="frm_contacto" class="frm" method="POST" onsubmit="return false;">
                     <?php echo CHtml::hiddenField('action', 'addContacto') ?>
                     <?php
@@ -24,11 +21,8 @@
                     ?>
                     <div class="row">
                         <div class="col-md-12 ">
-
                             <h5><?php echo Driver::t("Detalle") ?></h5>
-
                             <div class="top20">
-
                                 <div class="row top10">
                                     <div class="col-md-6">
                                         <?php
@@ -61,9 +55,9 @@
                                 <div class="row top10">
                                     <div class="col-md-6 ">
                                         <?php
-                                        echo CHtml::textField('identificacion', '', array(
-                                            'placeholder' => t("Identificación"),
-                                            'required' => true
+                                        echo CHtml::textField('telefono', '', array(
+                                            'placeholder' => t("Teléfono"),
+                                            'class' => "mobile_inputs"
                                         ))
                                         ?>
                                     </div>
@@ -77,45 +71,19 @@
                                     </div>
 
 
-                                </div> <!--row-->   
-                                <div class="row top10">
-                                    <div class="col-md-6 ">
-                                        <?php
-                                        echo CHtml::textField('telefono', '', array(
-                                            'placeholder' => t("Teléfono"),
-                                            'class' => "mobile_inputs"
-                                        ))
-                                        ?>
-                                    </div>
-                                    <div class="col-md-6 ">
-                                        <?php
-                                        echo CHtml::textField('email', '', array(
-                                            'placeholder' => t("Email"),
-                                            'data-validation' => 'email',
-                                            'required' => true
-                                        ))
-                                        ?>
-                                    </div>
-                                </div>
+                                </div> <!--row-->
                             </div>
                         </div> <!--delivery-info-wrap-->
-
-
                     </div> <!--col-->
-
+                    <div class="panel-footer top20">
+                        <button type="submit" class="orange-button medium rounded new-contacto-submit">
+                            <?php echo t("Guardar") ?>
+                        </button>
+                        <button type="button" data-id=".new-contacto" class="close-modal green-button medium rounded"><?php echo t("Cancelar") ?></button>
+                    </div>
+                </form>
 
             </div> <!--row-->
-
-            <div class="panel-footer top20">
-
-                <button type="submit" class="orange-button medium rounded new-contacto-submit">
-                    <?php echo t("Guardar") ?>
-                </button>
-
-                <button type="button" data-id=".new-contacto" 
-                        class="close-modal green-button medium rounded"><?php echo t("Cancelar") ?></button>
-            </div>
-            </form>
         </div> <!--panel-footer-->
 
 
