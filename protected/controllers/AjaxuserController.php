@@ -657,9 +657,7 @@ class AjaxuserController extends CController {
 
     public function actionmisContactosFilteredList() {
         $aColumns = array(
-            'identificacion',
             'empresa',
-            'email',
             'l.nombre',
             'direccion',
             'z.zona',
@@ -737,9 +735,7 @@ class AjaxuserController extends CController {
 
 
                 $feed_data['aaData'][] = array(
-                    $val['identificacion'],
                     $val['empresa'],
-                    $val['email'],
                     $val['ciudad'],
                     $val['direccion'],
                     $val['sector'],
@@ -766,8 +762,8 @@ class AjaxuserController extends CController {
                 $res['sector'] = !empty($res['sector']) ? $res['sector'] : '';
                 $res['empresa'] = !empty($res['empresa']) ? $res['empresa'] : '';
                 $res['telefono'] = !empty($res['telefono']) ? $res['telefono'] : '';
-                $res['identificacion'] = !empty($res['identificacion']) ? $res['identificacion'] : '';
-                $res['email'] = !empty($res['email']) ? $res['email'] : '';
+                $res['identificacion'] = !empty($res['identificacion']) ? $res['identificacion'] : '-';
+                $res['email'] = !empty($res['email']) ? $res['email'] : '-';
 
                 $this->code = 1;
                 $this->msg = "OK";
