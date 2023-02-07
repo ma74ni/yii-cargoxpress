@@ -286,6 +286,19 @@ class Driver {
         }
         return false;
     }
+     public static function toListAux($data = '', $key = '', $value1 = '', $value2 = '', $default_value = '') {
+        $list = array();
+        if (is_array($data) && count($data) >= 1) {
+            if (!empty($default_value)) {
+                $list[] = $default_value;
+            }
+            foreach ($data as $val) {
+                $list[$val[$key]] = $val[$value1] . ' - ' . $val[$value2];
+            }
+            return $list;
+        }
+        return false;
+    }
 
     public static function getOrdenId($orden_id = '') {
         $db = new DbExt;

@@ -82,7 +82,7 @@ $this->renderPartial('/tpl/menuUser', array(
                             </div> <!--row-->
                             <?php
                             if ($contact_list = Driver::getContactoList(Driver::getClienteId())) {
-                                $contact_list = Driver::toList($contact_list, 'contacto_id', 'contacto', Driver::t("Por favor seleccione un contacto de la lista"));
+                                $contact_list = Driver::toListAux($contact_list, 'contacto_id', 'contacto', 'empresa', Driver::t("Por favor seleccione un contacto de la lista"));
                             }
 
                             if ($provincia_list = Driver::getProvinciaList()) {
