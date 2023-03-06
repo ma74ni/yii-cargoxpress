@@ -288,10 +288,22 @@ $(document).ready(function () {
     var hidden_id = $(this).data('hidden_id');
     var modal_detalle = $(this).data('modal_detalle');
     var modal_new = $(this).data('modal_new');
-    console.log(JSON.stringify($(this)));
+
     dump('modal show');
     $('.' + hidden_id).val(orden_id);
     $('.' + modal_detalle).modal('hide');
+    $('.' + modal_new).modal({
+      backdrop: 'static',
+      keyboard: false,
+    });
+  });
+
+  $(document).on('click', '.edit_t', function () {
+    var id = $(this).data('id');
+    var hidden_id = $(this).data('hidden_id');
+    var modal_new = $(this).data('modal_new');
+
+    $('.' + hidden_id).val(id);
     $('.' + modal_new).modal({
       backdrop: 'static',
       keyboard: false,
@@ -943,6 +955,11 @@ function callAjax(action, params, button) {
             $('#provincia_origen_id').val(data.details.provincia_origen_id);
             $('#provincia_destino_id').trigger('chosen:updated');
             $('#provincia_origen_id').trigger('chosen:updated');
+            $('#peso').val(data.details.peso);
+            $('#no_gestiones').val(data.details.no_gestiones)
+            $('#tarifa').val(data.details.tarifa);
+            $('#costo').val(data.details.costo);
+
             //lleno dropdowns origen
             if (data.details.provincia_origen_id == '0') {
               $('#zona_origen').val('0');

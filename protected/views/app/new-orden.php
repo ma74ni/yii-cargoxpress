@@ -86,7 +86,7 @@
                                         'value' => "Delivery"
                                     ));
                                     ?>
-                                    <span><?php echo Driver::t("Delivery") ?></span>
+                                    <span><?php echo Driver::t("Ilimitado") ?></span>
                                 </div> <!--col-->
                             </div> <!--row-->
                             
