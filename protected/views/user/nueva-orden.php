@@ -40,7 +40,7 @@ $this->renderPartial('/tpl/menuUser', array(
                     <div class="row">
                         <div class="col-md-12 ">
 
-                            <h5><?php echo Driver::t("Detalle") ?></h5>
+                            <h5><?php echo Driver::t("Indicaciones") ?></h5>
                             <div class="top10">
                                 <?php
                                 echo CHtml::textArea('detalle', '', array(
@@ -84,10 +84,6 @@ $this->renderPartial('/tpl/menuUser', array(
                             if ($contact_list = Driver::getContactoList(Driver::getClienteId())) {
                                 $contact_list = Driver::toListAux($contact_list, 'contacto_id', 'contacto', 'empresa', Driver::t("Por favor seleccione un contacto de la lista"));
                             }
-
-                            if ($provincia_list = Driver::getProvinciaList()) {
-                                $provincia_list = Driver::toList($provincia_list, 'id', 'nombre', Driver::t("Por favor seleccione una provincia de la lista"));
-                            }
                             ?>
 
                             <div class="top20">
@@ -114,8 +110,10 @@ $this->renderPartial('/tpl/menuUser', array(
                                     <div class="col-md-6 ">
                                         <select required="true" class="ciudad_origen_id_n chosen" name="ciudad_origen_id_n" id="ciudad_origen_id_n">
                                             <option >Por favor seleccione una ciudad de la lista</option>
-                                            <option value="2">QUITO</option>
+                                            <option value="33">AMBATO</option>
+                                            <option value="31">CUENCA</option>
                                             <option value="29">GUAYAQUIL</option>
+                                            <option value="2">QUITO</option>
                                         </select>
                                     </div> <!--col-->
                                 </div> <!--row-->
@@ -176,8 +174,10 @@ $this->renderPartial('/tpl/menuUser', array(
                                     <div class="col-md-6 ">
                                         <select required="true" class="ciudad_destino_id_n chosen" name="ciudad_destino_id_n" id="ciudad_destino_id_n">
                                             <option >Por favor seleccione una ciudad de la lista</option>
-                                            <option value="2">QUITO</option>
+                                            <option value="33">AMBATO</option>
+                                            <option value="31">CUENCA</option>
                                             <option value="29">GUAYAQUIL</option>
+                                            <option value="2">QUITO</option>
                                         </select>
                                     </div> <!--col-->
                                 </div> <!--row-->

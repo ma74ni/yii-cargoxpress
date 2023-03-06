@@ -44,11 +44,11 @@ $this->renderPartial('/tpl/menuUser', array(
                         <tr>
                             <th width="3%"></th>
                             <th width="10%"><?php echo t("Código") ?></th>      
+                            <th><?php echo t("Persona o Empresa Origen") ?></th>
+                            <th><?php echo t("Dirección Origen") ?></th>
+                            <th><?php echo t("Persona o Empresa Destino") ?></th>
+                            <th><?php echo t("Dirección Destino") ?></th>
                             <th><?php echo t("Tipo Servicio") ?></th>
-                            <th><?php echo t("Nombre") ?></th>
-                            <th><?php echo t("Ciudad") ?></th>
-                            <th><?php echo t("Dirección") ?></th>
-                            <th><?php echo t("Sector") ?></th>
                             <th><?php echo t("Fecha Creación") ?></th>
                             <th><?php echo t("Estado") ?></th>      
                             <th width="10%"></th>

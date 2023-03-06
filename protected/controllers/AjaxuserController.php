@@ -179,12 +179,12 @@ class AjaxuserController extends CController {
 
                 $feed_data['aaData'][] = array(
                     $selecciona,
-                    $val['codigo_orden'] . $action,
-                    $val['tipo_servicio'],
+                    $val['codigo_orden'],
+                    $val['origen'],
+                    $val['direccion_origen'],
                     $val['destino'],
-                    $val['ciudad_destino'],
                     $val['direccion_destino'],
-                    $val['zona_destino_nombre'],
+                    $val['tipo_servicio'],
                     $date_created,
                     $status,
                     $action1
@@ -529,6 +529,7 @@ class AjaxuserController extends CController {
     }
 
     public function actionGetContactoInfo() {
+        echo $this->data['contacto_id'];
         if ($res = Driver::getContactoByID($this->data['contacto_id'], Driver::getClienteId())) {
             $this->msg = "OK";
             $this->code = 1;
