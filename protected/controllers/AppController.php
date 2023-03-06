@@ -733,53 +733,49 @@ class AppController extends CController {
             if ($res = $DbExt->rst($stmt)) {
 
                 foreach ($res as $val) {
-                    $fecha_envio = Yii::app()->functions->prettyDate($val['fecha_envio'], true);
-                    $date_created = Yii::app()->functions->prettyDate($val['o.date_created'], true);
-                    $fecha_entrega = Yii::app()->functions->prettyDate($val['fecha_entrega'], true);
+                    $date_created = Yii::app()->functions->prettyDate($val['date_created'], true);
                     $data[] = array(
                         $val['codigo_orden'],
-                        $val['tipo_servicio'],
                         $val['nombres'],
+
                         $val['origen'],
                         $val['remitente'],
                         $val['telefono_remitente'],
                         $val['ciudad_origen'],
-                        $val['direccion_origen'],
-                        $val['zona_origen_nombre'],
+
                         $val['destino'],
                         $val['recibe'],
                         $val['telefono_recibe'],
                         $val['ciudad_destino'],
-                        $val['direccion_destino'],
-                        $val['zona_destino_nombre'],
-                        $date_created,
-                        $fecha_envio,
-                        $fecha_entrega,
+
                         $val['detalle'],
+                        $date_created,
+
+                        $val['peso'],
+                        $val['no_gestiones'],
+                        $val['tarifa'],
+                        $val['costo'],
                         $val['estado']
                     );
                 }
 
                 $header = array(
-                    driver::t("ID"),
-                    driver::t("Tipo Servicio"),
+                    driver::t("ID Código de Guía"),
                     driver::t("Cliente"),
                     driver::t("Origen"),
                     driver::t("Remitente"),
                     driver::t("Telefono Remitente"),
                     driver::t("Ciudad Origen"),
-                    driver::t("Direccion Origen"),
-                    driver::t("Zona Origen"),
                     driver::t("Destino"),
                     driver::t("Recibe"),
                     driver::t("Telefono Recibe"),
                     driver::t("Ciudad Destino"),
-                    driver::t("Direccion Destino"),
-                    driver::t("Zona Destino"),
-                    driver::t("Fecha Creacion"),
-                    driver::t("Fecha Envio"),
-                    driver::t("Fecha Entrega"),
-                    driver::t("Detalle"),
+                    driver::t("Indicaciones"),
+                    driver::t("Fecha y Hora de Creación"),
+                    driver::t("Peso"),
+                    driver::t("Número de Gestiones"),
+                    driver::t("Tarifa"),
+                    driver::t("Costo"),
                     driver::t("Estado"),
                 );
 
