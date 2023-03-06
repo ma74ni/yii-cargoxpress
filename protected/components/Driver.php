@@ -2156,6 +2156,21 @@ from {{driver_task_view}} a
         return false;
     }
 
+    public static function getClienteByID($id_cliente = '') {
+        $db = new DbExt;
+        $stmt = "SELECT c.* 
+		FROM {{clientes}} c 
+		WHERE 
+		c.id_cliente=" . self::q($id_cliente) . " 
+		LIMIT 0,1
+		";
+        //dump($stmt);
+        if ($res = $db->rst($stmt)) {
+            return $res[0];
+        }
+        return false;
+    }
+
     public static function getContactoByID($contacto_id = '', $id_cliente = '') {
         $db = new DbExt;
         $stmt = "SELECT c.*,l.id AS 'ciudad_id',l.id_padre AS 'provincia_id' 
@@ -2174,7 +2189,6 @@ from {{driver_task_view}} a
         }
         return false;
     }
-
     public static function getCompanyByID($id = '', $customer_id = '') {
         $db = new DbExt;
         $stmt = "

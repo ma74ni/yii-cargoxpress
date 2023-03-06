@@ -308,6 +308,8 @@ $(document).ready(function () {
     } else {
       $('#peso').val('2');
       $('#no_gestiones').val('1');
+      $('#tarifa').val('2.7');
+      $('#costo').val('2');
     }
   });
   $('.new-orden').on('hide.bs.modal', function (e) {
@@ -379,6 +381,17 @@ $(document).ready(function () {
       $('#provincia_destino_id').trigger('chosen:updated');
     } else {
       callAjax('loadContactInfoDestino', 'contacto_id=' + contacto_id);
+    }
+  });
+
+  $(document).on('change', '.id_cliente', function(){
+    let contacto_id = $(this).val();
+    if (contacto_id == '0') {
+      $('#origen').val('');
+      $('#direccion_origen').val('');
+      $('#telefono_remitente').val('');
+    } else {
+      callAjax('loadClientInfoOrigen', 'contacto_id=' + contacto_id);
     }
   });
 
@@ -512,7 +525,6 @@ var ajax_request;
 /*mycall*/
 function callAjax(action, params, button) {
   dump(ajax_url + '/' + action + '?' + params);
-
   params += '&language=' + language;
   ajax_request = $.ajax({
     url: ajax_url + '/' + action,
@@ -994,6 +1006,7 @@ function callAjax(action, params, button) {
             break;
 
           case 'loadContactInfoOrigen':
+            console.log('funciona')
             $('#origen').val(data.details.empresa);
             $('#direccion_origen').val(data.details.direccion);
             $('#remitente').val(data.details.contacto);
@@ -1056,7 +1069,14 @@ function callAjax(action, params, button) {
             }
 
             break;
+          case 'loadClientInfoOrigen':
+            $('#origen').val(data.details.empresa);
+            $('#direccion_origen').val(data.details.direccion);
+            $('#remitente').val(data.details.nombre + ' ' + data.details.apellido);
+            $('#telefono_remitente').val(data.details.telefono);
 
+
+            break;
           case 'getEditMensajero':
             $('#cedula').val(data.details.cedula);
             $('#nombre').val(data.details.nombre);

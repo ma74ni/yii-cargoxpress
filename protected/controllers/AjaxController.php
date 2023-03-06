@@ -35,7 +35,18 @@ class AjaxController extends CController {
         }
         unset($this->data['language']);
     }
-
+    public function actionGetClientInfo() {
+        if ($res = Driver::getClienteByID($this->data['contacto_id'])) {
+            $this->msg = "OK";
+            $this->code = 1;
+            $this->details = $res;
+        } else
+            $this->msg = t("Cliente no encontrado");
+        $this->jsonResponse();
+    }
+    public function actionLoadClientInfoOrigen() {
+        $this->actionGetClientInfo();
+    }
     public function beforeAction($action) {
         $action = Yii::app()->controller->action->id;
         $continue = true;
@@ -947,8 +958,10 @@ class AjaxController extends CController {
 
     public function actionAddOrden() {
 
-        /*dump($this->data);
-          die();*/
+        /*
+         * dump($this->data);
+         * die();
+         */
 
         $DbExt = new DbExt;
         $req = array(
@@ -981,6 +994,8 @@ class AjaxController extends CController {
                 'id_cliente' => isset($this->data['id_cliente']) ? $this->data['id_cliente'] : null,
                 'peso' => isset($this->data['peso']) ? $this->data['peso'] : '',
                 'no_gestiones' => isset($this->data['no_gestiones']) ? $this->data['no_gestiones'] : '',
+                'tarifa' => isset($this->data['tarifa']) ? $this->data['tarifa'] : '',
+                'costo' => isset($this->data['costo']) ? $this->data['costo'] : '',
             );
             try {
                 if (is_numeric($this->data['orden_id'])) {
@@ -1002,13 +1017,14 @@ class AjaxController extends CController {
                             'estado' => $params['estado'],
                             'date_created' => AdminFunctions::dateNow(),
                             'ip_address' => $_SERVER['REMOTE_ADDR'],
-                            'cliente_id' => $params['id_cliente']
+                            'cliente_id' => $params['id_cliente'],
+                            'tarifa' => $params['tarifa'],
+                            'costo' => $params['costo'],
                         );
                         $DbExt->insertData('{{historial_ordenes}}', $params_history);
                     } else
                         $this->msg = Driver::t("Problema al actualizar");
                 } else {
-
                     $params['estado'] = 'Creado';
 
                     if ($params['id_cliente'] == null || $params['id_cliente'] == "") {
@@ -1035,7 +1051,7 @@ class AjaxController extends CController {
                                     'estado' => 'Creado',
                                     'date_created' => AdminFunctions::dateNow(),
                                     'ip_address' => $_SERVER['REMOTE_ADDR'],
-                                    'cliente_id' => $params['id_cliente']
+                                    'cliente_id' => $params['id_cliente'],
                                 );
                                 $DbExt->insertData('{{historial_ordenes}}', $params_history);
                                 $this->code = 1;
@@ -1055,7 +1071,7 @@ class AjaxController extends CController {
         $this->jsonResponse();
     }
 
-    public function actionAddOrden2() {
+    public function actionç() {
 
         /* dump($this->data);
           die(); */

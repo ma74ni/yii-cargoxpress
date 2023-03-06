@@ -28,7 +28,7 @@
                     <div class="row">
                         <div class="col-md-12 ">
 
-                            <h5><?php echo Driver::t("Detalle") ?></h5>
+                            <h5><?php echo Driver::t("Indicaciones") ?></h5>
                             <div class="top10">
                                 <?php
                                 echo CHtml::textArea('detalle', '', array(
@@ -96,24 +96,51 @@
 
                                 <div class="row top10">
                                     <div class="col-md-6 ">
+                                        <label class="font-medium"><?php echo Driver::t("Peso") ?></label>
                                         <?php
                                         echo CHtml::textField('peso', '', array(
                                             'placeholder' => Driver::t("Peso"),
                                             'class' => "validate numeric_only",
-                                            'data-validation' => "required"
+                                            'data-validation' => "required",
+                                            'maxlength' => '3'
                                         ))
                                         ?>
                                     </div> <!--col-->
                                     <div class="col-md-6 ">
+                                        <label class="font-medium"><?php echo Driver::t("Número de Gestiones") ?></label>
                                         <?php
                                         echo CHtml::textField('no_gestiones', '', array(
                                             'placeholder' => Driver::t("Número de Gestiones"),
                                             'class' => "validate numeric_only",
-                                            'data-validation' => "required"
+                                            'data-validation' => "required",
+                                            'maxlength' => '3'
                                         ))
                                         ?>
                                     </div> <!--col-->
-                                    
+                                </div> <!--row-->
+                                <div class="row top10">
+                                    <div class="col-md-6 ">
+                                        <label class="font-medium"><?php echo Driver::t("Tarifa") ?></label>
+                                        <?php
+                                        echo CHtml::textField('tarifa', '', array(
+                                            'placeholder' => Driver::t("Tarifa"),
+                                            'class' => "validate numeric_only",
+                                            'data-validation' => "required",
+                                            'maxlength' => '4'
+                                        ))
+                                        ?>
+                                    </div> <!--col-->
+                                    <div class="col-md-6 ">
+                                        <label class="font-medium"><?php echo Driver::t("Costo") ?></label>
+                                        <?php
+                                        echo CHtml::textField('costo', '', array(
+                                            'placeholder' => Driver::t("Costo"),
+                                            'class' => "validate numeric_only",
+                                            'data-validation' => "required",
+                                            'maxlength' => '3'
+                                        ))
+                                        ?>
+                                    </div> <!--col-->
                                 </div> <!--row-->
                                 <div class="row top10">
                                     <div class="col-md-6">
@@ -156,7 +183,8 @@
                                         <?php
                                         echo CHtml::textField('telefono_remitente', '', array(
                                             'placeholder' => t("Teléfono Remitente"),
-                                            'class' => "mobile_inputs"
+                                            'class' => "mobile_inputs",
+                                            'maxlength' => '10'
                                         ))
                                         ?>
                                     </div>
