@@ -377,7 +377,19 @@ $(document).ready(function () {
       callAjax('loadContactInfoDestino', 'contacto_id=' + contacto_id);
     }
   });
-
+  $(document).on('click', '#seleccionar-todos', function () {
+    console.log('seleccionar todos');
+    if(this.checked) {
+      // Iterate each checkbox
+      $(':checkbox').each(function() {
+        this.checked = true;
+      });
+    } else {
+      $(':checkbox').each(function() {
+        this.checked = false;
+      });
+    }
+  })
   $(document).on('change', '.provincia_origen_id', function () {
     var id = $(this).val();
 
@@ -1135,11 +1147,11 @@ function initTableOrdenesUser() {
   params += '&language=' + language;
 
   if ($.fn.dataTable.isDataTable('#table_list')) {
-    table = $('#table_list').DataTable();
+    table = $('#table_list_mn').DataTable();
     table.destroy();
   }
 
-  data_table = $('#table_list').dataTable({
+  data_table = $('#table_list_mn').dataTable({
     iDisplayLength: 20,
     bProcessing: true,
     bServerSide: true,
@@ -1149,10 +1161,28 @@ function initTableOrdenesUser() {
     sPaginationType: 'full_numbers',
     responsive: true,
     //"bFilter":false,
+    columns: [
+      { orderable: false },
+      null,
+      null,
+      null,
+      null,
+        null,
+        null,
+        null,
+      { orderable: false },
+        null
+    ],
     bLengthChange: false,
     oLanguage: {
       sProcessing: '<p>Procesando.. <i class="fa fa-spinner fa-spin"></i></p>',
     },
+    aoColumnDefs: [
+      {
+        bSortable: false,
+        aTargets: [ -1 ]
+      }
+    ],
     oLanguage: {
       sEmptyTable: js_lang.tablet_1,
       sInfo: js_lang.tablet_2,

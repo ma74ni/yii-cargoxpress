@@ -158,7 +158,7 @@ class AjaxuserController extends CController {
                 $date_created = AdminFunctions::prettyDate($val['date_created'], true);
                 $date_created = Yii::app()->functions->translateDate($date_created);
                 $nombre_selecciona = "seleccionado_" . $val['codigo_orden'];
-                $selecciona = "<div>";
+                $selecciona = "<div style='text-align: center;'>";
                 $selecciona .= CHtml::checkBox($nombre_selecciona, false, array(
                             'class' => "seleccionado",
                             'value' => $val['orden_id']

@@ -15,34 +15,39 @@ $this->renderPartial('/tpl/menuUser', array(
 <div class="content-wrapper">
     <!-- START PAGE CONTENT-->
     <div class="page-content fade-in-up">
-
-        <div class="nav_option">
-            <div class="row">
-                <div class="col-md-6 ">
-                    <b><?php echo t("Mis Órdenes") ?></b>
-                </div> <!--col-->
-                <div class="col-md-6 text-right">
-                    <div class="row">
-                        <div class="col-3"><a class="green-button left rounded" href="<?php echo Yii::app()->createUrl('/user/nuevaOrden') ?>"> <?php echo t("Nueva Orden") ?> </a></div>
-                        <div class="col-3"><a class="orange-button left rounded" href="javascript:tableReload();"><?php echo t("Refresh") ?></a></div>
-                        <div class="col-3"><a class="blue-button left rounded" id="btn_busqueda_avanzada" href="#"> <i class="fa fa-search"></i> </a></div>
-                    </div>
-
-
-
-
-                </div> <!--col-->
-
-            </div> <!--row-->
-        </div> <!--nav_option-->
-
         <div class="inner">
             <form id="frm_table_ordenes_user" class="frm_table">
+                <div class="row">
+                    <div class="col-md-6 ">
+                        <b><?php echo t("Mis Órdenes") ?></b>
+                    </div> <!--col-->
+                    <div class="col-md-6 text-center">
+                        <div class="row">
+                            <div class="col-3">
+                                <button title="Imprime los comprobantes seleccionados en los checks"  name="imprimir-comprobantes" type="submit" class="orange-button rounded submitbutton">
+                                    <?php echo t("Imprimir Comprobantes") ?>
+                                </button>
+                            </div>
+                            <div class="col-2"><a class="green-button left rounded d-block" href="<?php echo Yii::app()->createUrl('/user/nuevaOrden') ?>"> <?php echo t("Nueva Orden") ?> </a></div>
+                            <div class="col-2"><a class="orange-button left rounded d-block" href="javascript:tableReload();"><?php echo t("Refresh") ?></a></div>
+                            <div class="col-2"><a class="blue-button left rounded d-block" id="btn_busqueda_avanzada" href="#"> <i class="fa fa-search"></i> </a></div>
+                        </div>
+                    </div> <!--col-->
+                </div> <!--row-->
+
                 <?php echo CHtml::hiddenField('action', 'misPedidosList') ?>
-                <table id="table_list" class="table table-hover">
+                <table id="table_list_mn" class="table table-hover">
                     <thead>
                         <tr>
-                            <th width="3%"></th>
+                            <th data-order="false" width="3%">
+                                <?php
+                                $nombre_selecciona = "seleccionar-todos";
+                                $selecciona = CHtml::checkBox($nombre_selecciona, false, array(
+                                        'class' => "mn-seleccionado",
+                                    ));
+                                echo $selecciona;
+                                ?>
+                            </th>
                             <th width="10%"><?php echo t("Código") ?></th>      
                             <th><?php echo t("Persona o Empresa Origen") ?></th>
                             <th><?php echo t("Dirección Origen") ?></th>
