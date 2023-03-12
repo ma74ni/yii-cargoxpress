@@ -529,7 +529,6 @@ class AjaxuserController extends CController {
     }
 
     public function actionGetContactoInfo() {
-        echo $this->data['contacto_id'];
         if ($res = Driver::getContactoByID($this->data['contacto_id'], Driver::getClienteId())) {
             $this->msg = "OK";
             $this->code = 1;

@@ -401,9 +401,21 @@ $(document).ready(function () {
     if (contacto_id == '0') {
       $('#origen').val('');
       $('#direccion_origen').val('');
+      $('#remitente').val('');
       $('#telefono_remitente').val('');
     } else {
       callAjax('loadClientInfoOrigen', 'contacto_id=' + contacto_id);
+    }
+  });
+  $(document).on('change', '.id_cliente_destino', function(){
+    let contacto_id = $(this).val();
+    if (contacto_id == '0') {
+      $('#destino').val('');
+      $('#direccion_destino').val('');
+      $('#recibe').val('');
+      $('#telefono_recibe').val('');
+    } else {
+      callAjax('loadClientInfoDestino', 'contacto_id=' + contacto_id);
     }
   });
 
@@ -1023,7 +1035,6 @@ function callAjax(action, params, button) {
             break;
 
           case 'loadContactInfoOrigen':
-            console.log('funciona')
             $('#origen').val(data.details.empresa);
             $('#direccion_origen').val(data.details.direccion);
             $('#remitente').val(data.details.contacto);
@@ -1091,6 +1102,14 @@ function callAjax(action, params, button) {
             $('#direccion_origen').val(data.details.direccion);
             $('#remitente').val(data.details.nombre + ' ' + data.details.apellido);
             $('#telefono_remitente').val(data.details.telefono);
+
+
+            break;
+          case 'loadClientInfoDestino':
+            $('#destino').val(data.details.empresa);
+            $('#direccion_destino').val(data.details.direccion);
+            $('#recibe').val(data.details.nombre + ' ' + data.details.apellido);
+            $('#telefono_recibe').val(data.details.telefono);
 
 
             break;
@@ -1456,7 +1475,6 @@ function callAjax(action, params, button) {
             el.select();
             document.execCommand('copy');
             document.body.removeChild(el);
-            console.log('copia');
             nAlert('Orden copiada en el portapapeles', 'success');
 
             break;

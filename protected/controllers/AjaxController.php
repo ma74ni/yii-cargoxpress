@@ -47,6 +47,9 @@ class AjaxController extends CController {
     public function actionLoadClientInfoOrigen() {
         $this->actionGetClientInfo();
     }
+    public function actionLoadClientInfoDestino() {
+        $this->actionGetClientInfo();
+    }
     public function beforeAction($action) {
         $action = Yii::app()->controller->action->id;
         $continue = true;
@@ -109,7 +112,7 @@ class AjaxController extends CController {
                     $this->details = Yii::app()->createUrl('/app/dashboard');
 
                     if (isset($this->data['remember'])) {
-                        Yii::app()->request->cookies['kt_username'] = new CHttpCookie('kt_username', $this->data['email_address']);
+                        Yii::app()->request->cookies['kt_username'] = new CHttpCookie('kt_username', $this->data['email']);
                         $runtime_path = Yii::getPathOfAlias('webroot') . "/protected/runtime";
                         if (!file_exists($runtime_path)) {
                             mkdir($runtime_path, 0777);

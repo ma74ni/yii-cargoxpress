@@ -37,22 +37,6 @@
                                 ))
                                 ?>
                             </div>
-
-                            <div class="top10 row">
-                                <div class="col-md-12">
-                                    <?php
-                                    if ($clientes_list = Driver::getClientesList()) {
-                                        $clientes_list = Driver::toList($clientes_list, 'id_cliente', 'nombres', Driver::t("Por favor seleccione un cliente de la lista"));
-                                    }
-
-                                    echo CHtml::dropDownList('id_cliente', '', (array) $clientes_list
-                                            , array(
-                                        'class' => "id_cliente chosen",
-                                        'required' => true
-                                    ))
-                                    ?>
-                                </div> <!--col-->
-                            </div>
                             <div class="top10 row">
                                 <div class="col-md-12 ">
                                     <div class="form-group left-form-group">
@@ -89,59 +73,71 @@
                                     <span><?php echo Driver::t("Ilimitado") ?></span>
                                 </div> <!--col-->
                             </div> <!--row-->
-                            
-
+                            <div class="row top10">
+                                <div class="col-md-6 ">
+                                    <label class="font-medium"><?php echo Driver::t("Peso") ?></label>
+                                    <?php
+                                    echo CHtml::textField('peso', '', array(
+                                        'placeholder' => Driver::t("Peso"),
+                                        'class' => "validate numeric_only",
+                                        'data-validation' => "required",
+                                        'maxlength' => '3'
+                                    ))
+                                    ?>
+                                </div> <!--col-->
+                                <div class="col-md-6 ">
+                                    <label class="font-medium"><?php echo Driver::t("Número de Gestiones") ?></label>
+                                    <?php
+                                    echo CHtml::textField('no_gestiones', '', array(
+                                        'placeholder' => Driver::t("Número de Gestiones"),
+                                        'class' => "validate numeric_only",
+                                        'data-validation' => "required",
+                                        'maxlength' => '3'
+                                    ))
+                                    ?>
+                                </div> <!--col-->
+                            </div> <!--row-->
+                            <div class="row top10">
+                                <div class="col-md-6 ">
+                                    <label class="font-medium"><?php echo Driver::t("Tarifa") ?></label>
+                                    <?php
+                                    echo CHtml::textField('tarifa', '', array(
+                                        'placeholder' => Driver::t("Tarifa"),
+                                        'class' => "validate numeric_only",
+                                        'data-validation' => "required",
+                                        'maxlength' => '4'
+                                    ))
+                                    ?>
+                                </div> <!--col-->
+                                <div class="col-md-6 ">
+                                    <label class="font-medium"><?php echo Driver::t("Costo") ?></label>
+                                    <?php
+                                    echo CHtml::textField('costo', '', array(
+                                        'placeholder' => Driver::t("Costo"),
+                                        'class' => "validate numeric_only",
+                                        'data-validation' => "required",
+                                        'maxlength' => '3'
+                                    ))
+                                    ?>
+                                </div> <!--col-->
+                            </div> <!--row-->
                             <div class="top20">
                                 <h5 style="font-weight:bold;" class="dropoff_action_1"><?php echo t("Datos Origen") ?></h5>
+                                <div class="top10 row">
+                                    <div class="col-md-12">
+                                        <?php
+                                        if ($clientes_list = Driver::getClientesList()) {
+                                            $clientes_list = Driver::toList($clientes_list, 'id_cliente', 'nombres', Driver::t("Por favor seleccione un cliente de la lista"));
+                                        }
 
-                                <div class="row top10">
-                                    <div class="col-md-6 ">
-                                        <label class="font-medium"><?php echo Driver::t("Peso") ?></label>
-                                        <?php
-                                        echo CHtml::textField('peso', '', array(
-                                            'placeholder' => Driver::t("Peso"),
-                                            'class' => "validate numeric_only",
-                                            'data-validation' => "required",
-                                            'maxlength' => '3'
-                                        ))
+                                        echo CHtml::dropDownList('id_cliente', '', (array) $clientes_list
+                                            , array(
+                                                'class' => "id_cliente chosen",
+                                                'required' => true
+                                            ))
                                         ?>
                                     </div> <!--col-->
-                                    <div class="col-md-6 ">
-                                        <label class="font-medium"><?php echo Driver::t("Número de Gestiones") ?></label>
-                                        <?php
-                                        echo CHtml::textField('no_gestiones', '', array(
-                                            'placeholder' => Driver::t("Número de Gestiones"),
-                                            'class' => "validate numeric_only",
-                                            'data-validation' => "required",
-                                            'maxlength' => '3'
-                                        ))
-                                        ?>
-                                    </div> <!--col-->
-                                </div> <!--row-->
-                                <div class="row top10">
-                                    <div class="col-md-6 ">
-                                        <label class="font-medium"><?php echo Driver::t("Tarifa") ?></label>
-                                        <?php
-                                        echo CHtml::textField('tarifa', '', array(
-                                            'placeholder' => Driver::t("Tarifa"),
-                                            'class' => "validate numeric_only",
-                                            'data-validation' => "required",
-                                            'maxlength' => '4'
-                                        ))
-                                        ?>
-                                    </div> <!--col-->
-                                    <div class="col-md-6 ">
-                                        <label class="font-medium"><?php echo Driver::t("Costo") ?></label>
-                                        <?php
-                                        echo CHtml::textField('costo', '', array(
-                                            'placeholder' => Driver::t("Costo"),
-                                            'class' => "validate numeric_only",
-                                            'data-validation' => "required",
-                                            'maxlength' => '3'
-                                        ))
-                                        ?>
-                                    </div> <!--col-->
-                                </div> <!--row-->
+                                </div>
                                 <div class="row top10">
                                     <div class="col-md-6">
                                         <?php
@@ -154,6 +150,8 @@
                                     <div class="col-md-6 ">
                                        <select required="true" class="ciudad_origen_id_n chosen" name="ciudad_origen_id_n" id="ciudad_origen_id_n">
                                             <option >Por favor seleccione una ciudad de la lista</option>
+                                            <option value="33">AMBATO</option>
+                                            <option value="31">CUENCA</option>
                                             <option value="2">QUITO</option>
                                             <option value="29">GUAYAQUIL</option>
                                         </select>
@@ -192,10 +190,24 @@
                             </div> <!--delivery-info-wrap-->
 
 
-                            <div class="top20"> 
-
+                            <div class="top20">
                                 <h5 style="font-weight:bold;" class="dropoff_action_2"><?php echo t("Datos Destino") ?></h5>
+                                <div class="top10 row">
+                                    <div class="col-md-12">
+                                        <?php
+                                        if ($clientes_list = Driver::getClientesList()) {
+                                            $clientes_list = Driver::toList($clientes_list, 'id_cliente', 'nombres', Driver::t("Por favor seleccione un cliente de la lista"));
+                                        }
 
+                                        echo CHtml::dropDownList('id_cliente_destino', '', (array) $clientes_list
+                                            , array(
+                                                'class' => "id_cliente_destino chosen",
+                                                'required' => true
+                                            ));
+
+                                        ?>
+                                    </div> <!--col-->
+                                </div>
                                 <div class="row top10">
                                     <div class="col-md-6">
                                         <?php
@@ -208,6 +220,8 @@
                                     <div class="col-md-6 ">
                                         <select required="true" class="ciudad_destino_id_n chosen" name="ciudad_destino_id_n" id="ciudad_destino_id_n">
                                             <option >Por favor seleccione una ciudad de la lista</option>
+                                            <option value="33">AMBATO</option>
+                                            <option value="31">CUENCA</option>
                                             <option value="2">QUITO</option>
                                             <option value="29">GUAYAQUIL</option>
                                         </select>

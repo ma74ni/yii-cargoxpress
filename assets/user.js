@@ -124,10 +124,8 @@ $(document).ready(function () {
       console.log('error');
     },
     onSuccess: function () {
-      console.log('validate');
       const data = $('#frm_orden').serializeArray();
       var params = $('#frm_orden').serialize();
-      console.log(params);
       var action = $('#frm_orden #action').val();
       var button = $('#frm_orden button[type="submit"]');
       callAjax(action, params, button);
@@ -378,7 +376,6 @@ $(document).ready(function () {
     }
   });
   $(document).on('click', '#seleccionar-todos', function () {
-    console.log('seleccionar todos');
     if(this.checked) {
       // Iterate each checkbox
       $(':checkbox').each(function() {
@@ -505,7 +502,6 @@ var ajax_request;
 /*mycall*/
 function callAjax(action, params, button) {
   dump(ajax_url + '/' + action + '?' + params);
-
   params += '&language=' + language;
 
   ajax_request = $.ajax({
@@ -957,7 +953,6 @@ function callAjax(action, params, button) {
             el.select();
             document.execCommand('copy');
             document.body.removeChild(el);
-            console.log('copia');
             nAlert('Orden copiada en el portapapeles', 'success');
 
             break;
