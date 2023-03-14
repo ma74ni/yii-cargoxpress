@@ -161,7 +161,7 @@ class ScriptManageUser {
         );
 
         Yii::app()->clientScript->registerScriptFile(
-                Yii::app()->baseUrl . '/assets/user.js?ver=1.0', CClientScript::POS_END
+                Yii::app()->baseUrl . '/assets/user.js?ver=1.1', CClientScript::POS_END
         );
 
         Yii::app()->clientScript->registerScriptFile(

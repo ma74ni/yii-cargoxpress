@@ -129,8 +129,13 @@ $(document).ready(function () {
       var action = $('#frm_orden #action').val();
       var button = $('#frm_orden button[type="submit"]');
       callAjax(action, params, button);
-      //this.sendOrder(data);
+      this.cleanForm();
       return false;
+    },
+    cleanForm: function () {
+      $('#frm_orden').each(function(){
+        this.reset();
+      })
     },
     sendOrder: function (params) {
       const formatedParams = params.reduce((acc, item) => {
