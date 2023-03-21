@@ -16,14 +16,15 @@
             <div class="modal-body">
 
                 <form id="frm_orden" class="frm" method="POST" onsubmit="return false;">
-                    <?php echo CHtml::hiddenField('action', 'addOrden') ?>
                     <?php
+                    echo CHtml::hiddenField('action', 'addOrden');
                     echo CHtml::hiddenField('orden_id', '', array(
                         'class' => "orden_id"
                     ));
                     echo CHtml::hiddenField('estado', '', array(
                         'class' => "estado"
                     ));
+                    echo CHtml::hiddenField('cliente_id', 'addOrden');
                     ?>
                     <div class="row">
                         <div class="col-md-12 ">
@@ -74,7 +75,7 @@
                                 </div> <!--col-->
                             </div> <!--row-->
                             <div class="row top10">
-                                <div class="col-md-6 ">
+                                <div class="col-md-3 ">
                                     <label class="font-medium"><?php echo Driver::t("Peso") ?></label>
                                     <?php
                                     echo CHtml::textField('peso', '', array(
@@ -85,7 +86,7 @@
                                     ))
                                     ?>
                                 </div> <!--col-->
-                                <div class="col-md-6 ">
+                                <div class="col-md-3 ">
                                     <label class="font-medium"><?php echo Driver::t("Número de Gestiones") ?></label>
                                     <?php
                                     echo CHtml::textField('no_gestiones', '', array(
@@ -96,9 +97,7 @@
                                     ))
                                     ?>
                                 </div> <!--col-->
-                            </div> <!--row-->
-                            <div class="row top10">
-                                <div class="col-md-6 ">
+                                <div class="col-md-3 ">
                                     <label class="font-medium"><?php echo Driver::t("Tarifa") ?></label>
                                     <?php
                                     echo CHtml::textField('tarifa', '', array(
@@ -109,7 +108,7 @@
                                     ))
                                     ?>
                                 </div> <!--col-->
-                                <div class="col-md-6 ">
+                                <div class="col-md-3 ">
                                     <label class="font-medium"><?php echo Driver::t("Costo") ?></label>
                                     <?php
                                     echo CHtml::textField('costo', '', array(
@@ -121,22 +120,29 @@
                                     ?>
                                 </div> <!--col-->
                             </div> <!--row-->
+                            <div class="top10 row">
+                                <div class="col-md-12">
+                                    <?php
+                                    if ($clientes_list = Driver::getClientesList()) {
+                                        $clientes_list = Driver::toList($clientes_list, 'id_cliente', 'nombres', Driver::t("Por favor seleccione un cliente de la lista"));
+                                    }
+
+                                    echo CHtml::dropDownList('id_cliente', '', (array) $clientes_list
+                                        , array(
+                                            'class' => "id_cliente chosen",
+                                            'required' => true
+                                        ))
+                                    ?>
+                                </div> <!--col-->
+                            </div>
                             <div class="top20">
                                 <h5 style="font-weight:bold;" class="dropoff_action_1"><?php echo t("Datos Origen") ?></h5>
-                                <div class="top10 row">
-                                    <div class="col-md-12">
-                                        <?php
-                                        if ($clientes_list = Driver::getClientesList()) {
-                                            $clientes_list = Driver::toList($clientes_list, 'id_cliente', 'nombres', Driver::t("Por favor seleccione un cliente de la lista"));
-                                        }
-
-                                        echo CHtml::dropDownList('id_cliente', '', (array) $clientes_list
-                                            , array(
-                                                'class' => "id_cliente chosen",
-                                                'required' => true
-                                            ))
-                                        ?>
-                                    </div> <!--col-->
+                                <div class="row top20" style="margin-bottom:10px;">
+                                    <div class="col-md-12 content_contacto_origen">
+                                        <select required="true" class="contacto_origen chosen" name="contacto_origen" id="contacto_origen">
+                                            <option ><?php echo Driver::t("Por favor seleccione un contacto de la lista") ?></option>
+                                        </select>
+                                    </div>
                                 </div>
                                 <div class="row top10">
                                     <div class="col-md-6">
@@ -148,13 +154,21 @@
                                         ?>
                                     </div> <!--col-->
                                     <div class="col-md-6 ">
-                                       <select required="true" class="ciudad_origen_id_n chosen" name="ciudad_origen_id_n" id="ciudad_origen_id_n">
-                                            <option >Por favor seleccione una ciudad de la lista</option>
-                                            <option value="33">AMBATO</option>
-                                            <option value="31">CUENCA</option>
-                                            <option value="2">QUITO</option>
-                                            <option value="29">GUAYAQUIL</option>
-                                        </select>
+                                        <?php
+                                        $cities = array(
+                                            "33" => "AMBATO",
+                                            "31" => "CUENCA",
+                                            "2"   => "QUITO",
+                                            "29"  => "GUAYAQUIL",
+                                        );
+
+                                        echo CHtml::dropDownList('ciudad_origen_id_n', '', (array) $cities
+                                            , array(
+                                                    'empty'=>'Por favor seleccione una ciudad de la lista',
+                                                'class' => "ciudad_origen_id_n chosen",
+                                                'required' => true
+                                            ))
+                                        ?>
                                     </div> <!--col-->
                                 </div>
                                 <div class="row top10">
@@ -188,25 +202,14 @@
                                     </div>
                                 </div>
                             </div> <!--delivery-info-wrap-->
-
-
                             <div class="top20">
                                 <h5 style="font-weight:bold;" class="dropoff_action_2"><?php echo t("Datos Destino") ?></h5>
-                                <div class="top10 row">
-                                    <div class="col-md-12">
-                                        <?php
-                                        if ($clientes_list = Driver::getClientesList()) {
-                                            $clientes_list = Driver::toList($clientes_list, 'id_cliente', 'nombres', Driver::t("Por favor seleccione un cliente de la lista"));
-                                        }
-
-                                        echo CHtml::dropDownList('id_cliente_destino', '', (array) $clientes_list
-                                            , array(
-                                                'class' => "id_cliente_destino chosen",
-                                                'required' => true
-                                            ));
-
-                                        ?>
-                                    </div> <!--col-->
+                                <div class="row top20">
+                                    <div class="col-md-12 content_contacto_destino">
+                                        <select required="true" class="contacto_destino chosen" name="contacto_destino" id="contacto_destino">
+                                            <option ><?php echo Driver::t("Por favor seleccione un contacto de la lista") ?></option>
+                                        </select>
+                                    </div>
                                 </div>
                                 <div class="row top10">
                                     <div class="col-md-6">

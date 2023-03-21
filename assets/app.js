@@ -349,21 +349,10 @@ $(document).ready(function () {
       $('#telefono_remitente').val('');
       $('#origen').val('');
       $('#direccion_origen').val('');
-
-      $('#zona_origen').find('option').remove();
-      $('#zona_origen').append(
-        '<option >Por favor seleccione una zona de la lista</option>'
-      );
-      $('#zona_origen').val('0');
-      $('#zona_origen').trigger('chosen:updated');
-      $('#ciudad_origen_id').find('option').remove();
-      $('#ciudad_origen_id').append(
+      $('#ciudad_origen_id_n').find('option').remove();
+      $('#ciudad_origen_id_n').append(
         '<option >Por favor seleccione una ciudad de la lista</option>'
       );
-      $('#ciudad_origen_id').val('0');
-      $('#ciudad_origen_id').trigger('chosen:updated');
-      $('#provincia_origen_id').val('0');
-      $('#provincia_origen_id').trigger('chosen:updated');
     } else {
       callAjax('loadContactInfoOrigen', 'contacto_id=' + contacto_id);
     }
@@ -376,21 +365,11 @@ $(document).ready(function () {
       $('#telefono_recibe').val('');
       $('#recibe').val('');
       $('#direccion_destino').val('');
-
-      $('#zona_destino').find('option').remove();
-      $('#zona_destino').append(
-        '<option >Por favor seleccione una zona de la lista</option>'
-      );
-      $('#zona_destino').val('0');
-      $('#zona_destino').trigger('chosen:updated');
-      $('#ciudad_destino_id').find('option').remove();
-      $('#ciudad_destino_id').append(
+      $('#ciudad_destino_id_n').find('option').remove();
+      $('#ciudad_destino_id_n').append(
         '<option >Por favor seleccione una ciudad de la lista</option>'
       );
-      $('#ciudad_destino_id').val('0');
-      $('#ciudad_destino_id').trigger('chosen:updated');
-      $('#provincia_destino_id').val('0');
-      $('#provincia_destino_id').trigger('chosen:updated');
+
     } else {
       callAjax('loadContactInfoDestino', 'contacto_id=' + contacto_id);
     }
@@ -403,8 +382,29 @@ $(document).ready(function () {
       $('#direccion_origen').val('');
       $('#remitente').val('');
       $('#telefono_remitente').val('');
+      $('#ciudad_origen_id_n').empty().append(
+          `<option >Por favor seleccione una ciudad de la lista</option>
+           <option value="33">AMBATO</option>
+           <option value="31">CUENCA</option>
+           <option value="2">QUITO</option>
+           <option value="29">GUAYAQUIL</option>
+            `
+      );
+
+      $('#destino').val('');
+      $('#direccion_destino').val('');
+      $('#recibe').val('');
+      $('#telefono_recibe').val('');
+      $('#ciudad_destino_id_n').empty().append(
+          `<option >Por favor seleccione una ciudad de la lista</option>
+           <option value="33">AMBATO</option>
+           <option value="31">CUENCA</option>
+           <option value="2">QUITO</option>
+           <option value="29">GUAYAQUIL</option>
+            `
+      );
     } else {
-      callAjax('loadClientInfoOrigen', 'contacto_id=' + contacto_id);
+      callAjax('LoadClientInfoAdmin', 'contacto_id=' + contacto_id);
     }
   });
   $(document).on('change', '.id_cliente_destino', function(){
@@ -1041,6 +1041,8 @@ function callAjax(action, params, button) {
             $('#telefono_remitente').val(data.details.telefono);
             $('#provincia_origen_id').val(data.details.provincia_id);
             $('#provincia_origen_id').trigger('chosen:updated');
+
+
             if (data.details.provincia_id == '0') {
               $('#zona_origen').val('0');
               $('#ciudad_origen_id').val('0');
@@ -1097,13 +1099,30 @@ function callAjax(action, params, button) {
             }
 
             break;
-          case 'loadClientInfoOrigen':
-            $('#origen').val(data.details.empresa);
-            $('#direccion_origen').val(data.details.direccion);
-            $('#remitente').val(data.details.nombre + ' ' + data.details.apellido);
-            $('#telefono_remitente').val(data.details.telefono);
+          case 'LoadClientInfoAdmin':
+            if (data.code == 1) {
+              const $select_a  = $('#contacto_origen');
+              const $select_b  = $('#contacto_destino');
+              $select_a.find('option').remove();
+              $select_a.append('<option >Por favor seleccione un contacto de la lista</option>');
+              $select_a.val("0");
+              $.each(data.details, function (key, value)
+              {
+                $select_a.append('<option value=' + value.contacto_id + '>' + value.contacto + '</option>');
+              });
+              $select_a.trigger("chosen:updated");
 
-
+              $select_b.find('option').remove();
+              $select_b.append('<option >Por favor seleccione un contacto de la lista</option>');
+              $select_b.val("0");
+              $.each(data.details, function (key, value)
+              {
+                $select_b.append('<option value=' + value.contacto_id + '>' + value.contacto + '</option>');
+              });
+              $select_b.trigger("chosen:updated");
+            } else {
+              nAlert(data.msg, "warning");
+            }
             break;
           case 'loadClientInfoDestino':
             $('#destino').val(data.details.empresa);
@@ -1938,6 +1957,7 @@ function clearFormElements(ele) {
 }
 
 $(document).ready(function () {
+
   $(document).on('click', '.table-edit', function () {
     var id = $(this).data('modal');
     dump($(this).data('id'));

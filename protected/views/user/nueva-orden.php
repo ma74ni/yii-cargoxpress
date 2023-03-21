@@ -77,7 +77,7 @@ $this->renderPartial('/tpl/menuUser', array(
                                         'value' => "Delivery"
                                     ));
                                     ?>
-                                    <span><?php echo Driver::t("Delivery") ?></span>
+                                    <span><?php echo Driver::t("Iimitado") ?></span>
                                 </div> <!--col-->
                             </div> <!--row-->
                             <?php

@@ -19,7 +19,7 @@
 
 define('YII_ENABLE_ERROR_HANDLER', false);
 define('YII_ENABLE_EXCEPTION_HANDLER', false);
-ini_set("display_errors",true);
+ini_set("display_errors",false);
 // remove the following line when in production mode
 defined('YII_DEBUG') or define('YII_DEBUG',true);
 

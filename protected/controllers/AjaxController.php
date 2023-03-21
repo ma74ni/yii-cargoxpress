@@ -44,11 +44,38 @@ class AjaxController extends CController {
             $this->msg = t("Cliente no encontrado");
         $this->jsonResponse();
     }
+    public function actionGetClientInfoAdmin() {
+        if ($res = Driver::getContactByClient($this->data['contacto_id'])) {
+            $this->msg = "OK";
+            $this->code = 1;
+            $this->details = $res;
+        } else
+            $this->msg = t("Cliente no encontrado");
+        $this->jsonResponse();
+    }
     public function actionLoadClientInfoOrigen() {
         $this->actionGetClientInfo();
     }
+    public function actionLoadClientInfoAdmin() {
+        $this->actionGetClientInfoAdmin();
+    }
     public function actionLoadClientInfoDestino() {
         $this->actionGetClientInfo();
+    }
+    public function actionGetContactoInfo() {
+        if ($res = Driver::getContactoByID($this->data['contacto_id'])) {
+            $this->msg = "OK";
+            $this->code = 1;
+            $this->details = $res;
+        } else
+            $this->msg = t("Contacto no encontrado");
+        $this->jsonResponse();
+    }
+    public function actionLoadContactInfoOrigen() {
+        $this->actionGetContactoInfo();
+    }
+    public function actionLoadContactInfoDestino() {
+        $this->actionGetContactoInfo();
     }
     public function beforeAction($action) {
         $action = Yii::app()->controller->action->id;
@@ -974,19 +1001,48 @@ class AjaxController extends CController {
         $Validator = new Validator;
         $Validator->required($req, $this->data);
         if ($Validator->validate()) {
-
+            $zonaOrigen = 0;
+            $zonaDestino = 0;
+            switch ($this->data['ciudad_origen_id_n']) {
+                case 2:
+                    $zonaOrigen = 184;
+                    break;
+                case 29:
+                    $zonaOrigen = 185;
+                    break;
+                case 33:
+                    $zonaOrigen = 186;
+                    break;
+                case 31:
+                    $zonaOrigen = 187;
+                    break;
+            }
+            switch ($this->data['ciudad_destino_id_n']) {
+                case 2:
+                    $zonaDestino = 184;
+                    break;
+                case 29:
+                    $zonaDestino = 185;
+                    break;
+                case 33:
+                    $zonaDestino = 186;
+                    break;
+                case 31:
+                    $zonaDestino = 187;
+                    break;
+            }
             $params = array(
                 'tipo_servicio' => isset($this->data['tipo_servicio']) ? $this->data['tipo_servicio'] : '',
                 'origen' => isset($this->data['origen']) ? $this->data['origen'] : '',
                 'direccion_origen' => isset($this->data['direccion_origen']) ? $this->data['direccion_origen'] : '',
-                'zona_origen' => $this->data['ciudad_origen_id_n'] == 2 ? 184 : 185,
+                'zona_origen' => isset($this->data['ciudad_origen_id_n']) ? $zonaOrigen : '',
                 'remitente' => isset($this->data['remitente']) ? $this->data['remitente'] : '',
                 'telefono_remitente' => isset($this->data['telefono_remitente']) ? $this->data['telefono_remitente'] : '',
                 'destino' => isset($this->data['destino']) ? $this->data['destino'] : '',
                 'estado' => isset($this->data['estado']) ? $this->data['estado'] : '',
                 'detalle' => isset($this->data['detalle']) ? $this->data['detalle'] : '',
                 'direccion_destino' => isset($this->data['direccion_destino']) ? $this->data['direccion_destino'] : '',
-                'zona_destino' => $this->data['ciudad_destino_id_n'] == 2 ? 184 : 185,
+                'zona_destino' => isset($this->data['ciudad_destino_id_n']) ? $zonaDestino : '',
                 'origen_orden' => 'ADMIN',
                 'recibe' => isset($this->data['recibe']) ? $this->data['recibe'] : '',
                 'telefono_recibe' => isset($this->data['telefono_recibe']) ? $this->data['telefono_recibe'] : '',
