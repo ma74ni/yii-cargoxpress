@@ -1108,7 +1108,7 @@ function callAjax(action, params, button) {
               $select_a.val("0");
               $.each(data.details, function (key, value)
               {
-                $select_a.append('<option value=' + value.contacto_id + '>' + value.contacto + '</option>');
+                $select_a.append('<option value=' + value.contacto_id + '>' + value.contacto + ' - ' + value.empresa +'</option>');
               });
               $select_a.trigger("chosen:updated");
 
@@ -1117,7 +1117,7 @@ function callAjax(action, params, button) {
               $select_b.val("0");
               $.each(data.details, function (key, value)
               {
-                $select_b.append('<option value=' + value.contacto_id + '>' + value.contacto + '</option>');
+                $select_b.append('<option value=' + value.contacto_id + '>' + value.contacto + ' - ' + value.empresa +'</option>');
               });
               $select_b.trigger("chosen:updated");
             } else {
