@@ -71,11 +71,11 @@ class AppController extends CController {
         $js_lang = Yii::app()->functions->jsLanguageAdmin();
         $cs->registerScript(
                 'jsLanguageValidator', 'var jsLanguageValidator = ' . json_encode($js_lang_validator) . '
-		  ', CClientScript::POS_HEAD
+      ', CClientScript::POS_HEAD
         );
         $cs->registerScript(
                 'js_lang', 'var js_lang = ' . json_encode($js_lang) . ';
-		  ', CClientScript::POS_HEAD
+      ', CClientScript::POS_HEAD
         );
 
         $cs->registerScript(
@@ -735,48 +735,50 @@ class AppController extends CController {
                 foreach ($res as $val) {
                     $date_created = Yii::app()->functions->prettyDate($val['date_created'], true);
                     $data[] = array(
-                        $val['codigo_orden'],
-                        $val['nombres'],
+                      $val['codigo_orden'],
+                      $val['nombres'],
 
-                        $val['origen'],
-                        $val['remitente'],
-                        $val['telefono_remitente'],
-                        $val['ciudad_origen'],
+                      $val['origen'],
+                      $val['remitente'],
+                      $val['telefono_remitente'],
+                      $val['ciudad_origen'],
 
-                        $val['destino'],
-                        $val['recibe'],
-                        $val['telefono_recibe'],
-                        $val['ciudad_destino'],
+                      $val['destino'],
+                      $val['recibe'],
+                      $val['telefono_recibe'],
+                      $val['ciudad_destino'],
 
-                        $val['detalle'],
-                        $date_created,
+                      $val['detalle'],
+                      $date_created,
+                      $val['estado'],
+                      $val['tipo_servicio'],
 
-                        $val['peso'],
-                        $val['no_gestiones'],
-                        $val['tarifa'],
-                        $val['costo'],
-                        $val['estado']
+                      $val['peso'],
+                      $val['no_gestiones'],
+                      $val['tarifa'],
+                      $val['costo'],
                     );
                 }
 
                 $header = array(
-                    driver::t("ID Código de Guía"),
-                    driver::t("Cliente"),
-                    driver::t("Origen"),
-                    driver::t("Remitente"),
-                    driver::t("Telefono Remitente"),
-                    driver::t("Ciudad Origen"),
-                    driver::t("Destino"),
-                    driver::t("Recibe"),
-                    driver::t("Telefono Recibe"),
-                    driver::t("Ciudad Destino"),
-                    driver::t("Indicaciones"),
-                    driver::t("Fecha y Hora de Creación"),
-                    driver::t("Peso"),
-                    driver::t("Número de Gestiones"),
-                    driver::t("Tarifa"),
-                    driver::t("Costo"),
-                    driver::t("Estado"),
+                  driver::t("ID Código de Guía"),
+                  driver::t("Cliente"),
+                  driver::t("Origen"),
+                  driver::t("Remitente"),
+                  driver::t("Telefono Remitente"),
+                  driver::t("Ciudad Origen"),
+                  driver::t("Destino"),
+                  driver::t("Recibe"),
+                  driver::t("Telefono"),
+                  driver::t("Ciudad Destino"),
+                  driver::t("Indicaciones"),
+                  driver::t("Fecha y Hora de Creación"),
+                  driver::t("Estado del Envío"),
+                  driver::t("Tipo de Servicio"),
+                  driver::t("Peso"),
+                  driver::t("Gestiones"),
+                  driver::t("Tarifa"),
+                  driver::t("Costo"),
                 );
 
                 $filename = 'ordenes-' . date('c') . '.csv';
