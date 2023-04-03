@@ -128,15 +128,10 @@ $(document).ready(function () {
       var params = $('#frm_orden').serialize();
       var action = $('#frm_orden #action').val();
       var button = $('#frm_orden button[type="submit"]');
-      callAjax(action, params, button);
-      this.cleanForm();
+      callAjax(action, params, button)
       return false;
     },
-    cleanForm: function () {
-      $('#frm_orden').each(function(){
-        this.reset();
-      })
-    },
+
     sendOrder: function (params) {
       const formatedParams = params.reduce((acc, item) => {
         const key = item.name;
@@ -574,8 +569,7 @@ function callAjax(action, params, button) {
             break;
 
           case 'addOrden':
-            $('.new-orden').modal('hide');
-            initTableOrdenesUser();
+
             Swal.fire({
               title: 'Exitoso',
               text: data.msg,
@@ -584,8 +578,11 @@ function callAjax(action, params, button) {
               confirmButtonColor: '#3085d6',
               cancelButtonColor: '#d33',
               confirmButtonText: 'Ok',
-            });
-
+            }).then(function(isConfirm){
+              if(isConfirm){
+                location.reload(true);
+              }
+            })
             break;
 
           case 'addContacto':
