@@ -94,46 +94,43 @@ class AjaxuserController extends CController {
     /* start Pedidos region */
 
     public function actionmisPedidosList() {
-        $aColumns = array(
-            'codigo_orden',
-            'tipo_servicio',
-            'o.destino',
-            'l_destino.nombre',
-            'direccion_destino',
-            'z_destino.zona',
-            'fecha_envio',
-            'estado'
-        );
+      $aColumns = array(
+        'codigo_orden',
+        'tipo_servicio',
+        'o.destino',
+        'l_destino.nombre',
+        'direccion_destino',
+        'z_destino.zona',
+        'fecha_envio',
+        'estado'
+      );
+      $t = AjaxDataTables::AjaxData($aColumns);
+      if (isset($_GET['debug'])) {
+          dump($t);
+      }
 
+      if (is_array($t) && count($t) >= 1) {
+        $sWhere = $t['sWhere'];
+        $sOrder = $t['sOrder'];
+        $sLimit = $t['sLimit'];
+      }
 
-        $t = AjaxDataTables::AjaxData($aColumns);
-        if (isset($_GET['debug'])) {
-            dump($t);
-        }
+      $and = '';
+      $and = " AND id_cliente =" . Driver::q(Driver::getClienteId()) . "  ";
+      //$and = " AND estado !='entregado' ";
 
-        if (is_array($t) && count($t) >= 1) {
-            $sWhere = $t['sWhere'];
-            $sOrder = $t['sOrder'];
-            $sLimit = $t['sLimit'];
-        }
-
-        $and = '';
-        $and = " AND id_cliente =" . Driver::q(Driver::getClienteId()) . "  ";
-        //$and = " AND estado !='entregado' ";
-
-        $stmt = "SELECT SQL_CALC_FOUND_ROWS o.*,z_destino.zona AS 'zona_destino_nombre',z_origen.zona AS 'zona_origen_nombre',l_destino.nombre AS 'ciudad_destino',l_origen.nombre AS 'ciudad_origen'
-		FROM
-		{{orden}} o
-                INNER JOIN {{zonas}} z_destino on o.zona_destino=z_destino.id
-                INNER JOIN {{locacion}} l_destino on z_destino.id_locacion=l_destino.id
-                INNER JOIN {{zonas}} z_origen on o.zona_origen=z_origen.id
-                INNER JOIN {{locacion}} l_origen on z_origen.id_locacion=l_origen.id
-		WHERE 1		
-		$and
-		$sWhere
-		ORDER BY o.date_created DESC 
-		limit 20;
-		";
+      $stmt = "SELECT SQL_CALC_FOUND_ROWS o.*,z_destino.zona AS 'zona_destino_nombre',z_origen.zona AS 'zona_origen_nombre',l_destino.nombre AS 'ciudad_destino',l_origen.nombre AS 'ciudad_origen'
+        FROM {{orden}} o
+        INNER JOIN {{zonas}} z_destino on o.zona_destino=z_destino.id
+        INNER JOIN {{locacion}} l_destino on z_destino.id_locacion=l_destino.id
+        INNER JOIN {{zonas}} z_origen on o.zona_origen=z_origen.id
+        INNER JOIN {{locacion}} l_origen on z_origen.id_locacion=l_origen.id
+        WHERE 1
+        $and
+        $sWhere
+        ORDER BY o.date_created DESC
+        $sLimit;
+      ";
         if (isset($_GET['debug'])) {
             dump($stmt);
         }
@@ -167,7 +164,7 @@ class AjaxuserController extends CController {
                 $status = "<span class=\"tag " . $val['estado'] . " \">" . Driver::t($val['estado']) . "</span>";
                 $action = "<div class=\"table-action\">";
                 $action1 = "<a class=\"btn btn-primary details\" data-hidden_id='orden_id' data-modal_detalle='detalle-orden-modal'
-			    	data-id=\"" . $val['orden_id'] . "\" href=\"#no\">" . t("Detalle") . "</a>";
+            data-id=\"" . $val['orden_id'] . "\" href=\"#no\">" . t("Detalle") . "</a>";
 
                 $clipboard = "<a title='Click para copiar en el portapapeles datos de orden' class=\"btn btn-success clipboard\" data-id=\"" . $val['orden_id'] . "\" href=\"#no\"><i class='fa fa-copy'></i></a>";
 
@@ -264,17 +261,17 @@ class AjaxuserController extends CController {
         }
 
         $stmt = "SELECT SQL_CALC_FOUND_ROWS o.*,z_destino.zona AS 'zona_destino_nombre',z_origen.zona AS 'zona_origen_nombre',l_destino.nombre AS 'ciudad_destino',l_origen.nombre AS 'ciudad_origen'
-		FROM
-		{{orden}} o
+    FROM
+    {{orden}} o
                 INNER JOIN {{zonas}} z_destino on o.zona_destino=z_destino.id
                 INNER JOIN {{locacion}} l_destino on z_destino.id_locacion=l_destino.id
                 INNER JOIN {{zonas}} z_origen on o.zona_origen=z_origen.id
                 INNER JOIN {{locacion}} l_origen on z_origen.id_locacion=l_origen.id
-		WHERE 1		
-		$and
-		ORDER BY o.date_created DESC 
+    WHERE 1
+    $and
+    ORDER BY o.date_created DESC
                 $sLimit;
-		";
+    ";
         if (isset($_GET['debug'])) {
             dump($stmt);
         }
@@ -308,8 +305,8 @@ class AjaxuserController extends CController {
                 $selecciona .= "</div>";
                 $status = "<span class=\"tag " . $val['estado'] . " \">" . Driver::t($val['estado']) . "</span>";
                 $action = "<div class=\"table-action\">";
-                $action1 = "<a class=\"btn btn-primary details\" data-hidden_id='orden_id' data-modal_detalle='detalle-orden-modal' 
-			    	data-id=\"" . $val['orden_id'] . "\" href=\"#no\">" . t("Detalle") . "</a>";
+                $action1 = "<a class=\"btn btn-primary details\" data-hidden_id='orden_id' data-modal_detalle='detalle-orden-modal'
+            data-id=\"" . $val['orden_id'] . "\" href=\"#no\">" . t("Detalle") . "</a>";
 
 
                 $action .= $action1;
@@ -371,7 +368,7 @@ class AjaxuserController extends CController {
                 /* get task history */
                 $history_details = array();
                 $history_data = array();
-                //if ( $info=Driver::getTaskId($this->data['id'])){		
+                //if ( $info=Driver::getTaskId($this->data['id'])){
 
                 if ($info = $res) {
                     if ($history_details = Driver::getHistorialOrdenes($this->data['orden_id'])) {
@@ -595,16 +592,16 @@ class AjaxuserController extends CController {
         //$and = " AND estado !='entregado' ";
 
         $stmt = "SELECT SQL_CALC_FOUND_ROWS o.*,z.zona AS 'sector',l.nombre AS 'ciudad'
-		FROM
-		{{contactos}} o
+    FROM
+    {{contactos}} o
                 INNER JOIN {{zonas}} z on o.zona=z.id
                 INNER JOIN {{locacion}} l on z.id_locacion=l.id
-		WHERE 1		
-		$and
-		$sWhere
-		ORDER BY o.empresa ASC 
-		limit 20;
-		";
+    WHERE 1
+    $and
+    $sWhere
+    ORDER BY o.empresa ASC
+    limit 20;
+    ";
         if (isset($_GET['debug'])) {
             dump($stmt);
         }
@@ -630,7 +627,7 @@ class AjaxuserController extends CController {
             foreach ($res as $val) {
                 $action = "<div class=\"table-action\">";
                 $action1 = "<a class=\"btn btn-primary details\" data-hidden_id='contacto_id' data-modal_detalle='detalle-contacto-modal'
-			    	data-id=\"" . $val['contacto_id'] . "\" href=\"#no\">" . t("Detalle") . "</a>";
+            data-id=\"" . $val['contacto_id'] . "\" href=\"#no\">" . t("Detalle") . "</a>";
 
 
                 $action .= $action1;
@@ -692,15 +689,15 @@ class AjaxuserController extends CController {
 
 
         $stmt = "SELECT SQL_CALC_FOUND_ROWS o.*,z.zona AS 'sector',l.nombre AS 'ciudad'
-		FROM
-		{{contactos}} o
+    FROM
+    {{contactos}} o
                 INNER JOIN {{zonas}} z on o.zona=z.id
-                INNER JOIN {{locacion}} l on z.id_locacion=l.id 
-                WHERE 1 
-		$and
-		$sWhere
-		ORDER BY o.empresa ASC;
-		";
+                INNER JOIN {{locacion}} l on z.id_locacion=l.id
+                WHERE 1
+    $and
+    $sWhere
+    ORDER BY o.empresa ASC;
+    ";
         if (isset($_GET['debug'])) {
             dump($stmt);
         }
@@ -725,7 +722,7 @@ class AjaxuserController extends CController {
             foreach ($res as $val) {
                 $action = "<div class=\"table-action\">";
                 $action1 = "<a class=\"btn btn-primary details\" data-hidden_id='contacto_id' data-modal_detalle='detalle-contacto-modal'
-			    	data-id=\"" . $val['contacto_id'] . "\" href=\"#no\">" . t("Detalle") . "</a>";
+            data-id=\"" . $val['contacto_id'] . "\" href=\"#no\">" . t("Detalle") . "</a>";
 
 
                 $action .= $action1;
@@ -843,11 +840,11 @@ class AjaxuserController extends CController {
             $wherefield = $this->data['whereid'];
             $tbl = $this->data['tbl'];
             $stmt = "
-			DELETE FROM
-			{{{$tbl}}}
-			WHERE
-			$wherefield=" . Driver::q($this->data['id']) . "
-			";
+      DELETE FROM
+      {{{$tbl}}}
+      WHERE
+      $wherefield=" . Driver::q($this->data['id']) . "
+      ";
             //dump($stmt);
             $DbExt = new DbExt;
             $DbExt->qry($stmt);
@@ -883,11 +880,11 @@ class AjaxuserController extends CController {
             $wherefield = $this->data['whereid'];
             $tbl = $this->data['tbl'];
             $stmt = "
-			DELETE FROM
-			{{{$tbl}}}
-			WHERE
-			$wherefield=" . Driver::q($this->data['id']) . "
-			";
+      DELETE FROM
+      {{{$tbl}}}
+      WHERE
+      $wherefield=" . Driver::q($this->data['id']) . "
+      ";
             //dump($stmt);
             $DbExt = new DbExt;
             $DbExt->qry($stmt);

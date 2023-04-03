@@ -207,21 +207,20 @@ class AjaxController extends CController {
 
         $and = '';
 
-        $stmt = "SELECT SQL_CALC_FOUND_ROWS o.*,z_destino.zona AS 'zona_destino_nombre',z_origen.zona AS 'zona_origen_nombre',l_destino.nombre AS 'ciudad_destino',l_origen.nombre AS 'ciudad_origen'
-		,CONCAT(c.nombre,' ',c.apellido) AS nombres
-                FROM
-		{{orden}} o
-                INNER JOIN {{zonas}} z_destino on o.zona_destino=z_destino.id
-                INNER JOIN {{locacion}} l_destino on z_destino.id_locacion=l_destino.id
-                INNER JOIN {{zonas}} z_origen on o.zona_origen=z_origen.id
-                INNER JOIN {{locacion}} l_origen on z_origen.id_locacion=l_origen.id
-                LEFT OUTER JOIN {{clientes}} c on c.id_cliente=o.id_cliente
-		WHERE 1		
-		$and
-		$sWhere
-                ORDER BY o.date_created DESC 
-                $sLimit;
-		";
+        $stmt = "SELECT SQL_CALC_FOUND_ROWS o.*,z_destino.zona AS 'zona_destino_nombre',z_origen.zona AS 'zona_origen_nombre',l_destino.nombre AS 'ciudad_destino',l_origen.nombre AS 'ciudad_origen', CONCAT(c.nombre,' ',c.apellido) AS nombres
+            FROM
+            {{orden}} o
+            INNER JOIN {{zonas}} z_destino on o.zona_destino=z_destino.id
+            INNER JOIN {{locacion}} l_destino on z_destino.id_locacion=l_destino.id
+            INNER JOIN {{zonas}} z_origen on o.zona_origen=z_origen.id
+            INNER JOIN {{locacion}} l_origen on z_origen.id_locacion=l_origen.id
+            LEFT OUTER JOIN {{clientes}} c on c.id_cliente=o.id_cliente
+            WHERE 1
+            $and
+            $sWhere
+            ORDER BY o.date_created DESC
+            $sLimit;
+        ";
 
         if (isset($_GET['debug'])) {
             dump($stmt);
@@ -249,8 +248,8 @@ class AjaxController extends CController {
                 $status = "<span class=\"tag " . $val['estado'] . " \">" . Driver::t($val['estado']) . "</span>";
                 $action = "<div class=\"s\">";
                 $action1 = "<a class=\"btn btn-primary details\" data-hidden_id='orden_id' data-modal_detalle='detalle-orden-modal'
-			    	data-id=\"" . $val['orden_id'] . "\" href=\"#no\">" . t("Detalle") . "</a>" . "&nbsp;|&nbsp;" . "<a class=\"btn btn-success edit_t\" data-hidden_id='orden_id' data-modal_new='new-orden'
-			    	data-id=\"" . $val['orden_id'] . "\" href=\"#no\">" . "<i class='fa fa-edit' aria-hidden='true'></i>" . "</a>";
+            data-id=\"" . $val['orden_id'] . "\" href=\"#no\">" . t("Detalle") . "</a>" . "&nbsp;|&nbsp;" . "<a class=\"btn btn-success edit_t\" data-hidden_id='orden_id' data-modal_new='new-orden'
+            data-id=\"" . $val['orden_id'] . "\" href=\"#no\">" . "<i class='fa fa-edit' aria-hidden='true'></i>" . "</a>";
 
 
                 $action .= $action1;
@@ -360,22 +359,22 @@ class AjaxController extends CController {
         }
 
         $stmt = "SELECT SQL_CALC_FOUND_ROWS o.*,z_destino.zona AS 'zona_destino_nombre',z_origen.zona AS 'zona_origen_nombre',l_destino.nombre AS 'ciudad_destino',l_origen.nombre AS 'ciudad_origen'
-		,CONCAT(c.nombre,' ',c.apellido) AS nombres,m.id_mensajero 
+    ,CONCAT(c.nombre,' ',c.apellido) AS nombres,m.id_mensajero
                 FROM
-		{{orden}} o
+    {{orden}} o
                 INNER JOIN {{zonas}} z_destino on o.zona_destino=z_destino.id
                 INNER JOIN {{locacion}} l_destino on z_destino.id_locacion=l_destino.id
                 INNER JOIN {{zonas}} z_origen on o.zona_origen=z_origen.id
                 INNER JOIN {{locacion}} l_origen on z_origen.id_locacion=l_origen.id
                  LEFT OUTER JOIN {{clientes}} c on c.id_cliente=o.id_cliente
-                 LEFT OUTER JOIN {{ruta}} r on o.id_ruta=r.id_ruta  
-                 LEFT OUTER JOIN {{mensajero}} m on r.id_mensajero=m.id_mensajero  
-		WHERE 1		
-		$and
-		$sWhere
-		ORDER BY o.date_created DESC 
+                 LEFT OUTER JOIN {{ruta}} r on o.id_ruta=r.id_ruta
+                 LEFT OUTER JOIN {{mensajero}} m on r.id_mensajero=m.id_mensajero
+    WHERE 1
+    $and
+    $sWhere
+    ORDER BY o.date_created DESC
                 $sLimit;
-		";
+    ";
         if (isset($_GET['debug'])) {
             dump($stmt);
         }
@@ -403,8 +402,8 @@ class AjaxController extends CController {
 
                 $status = "<span class=\"tag " . $val['estado'] . " \">" . Driver::t($val['estado']) . "</span>";
                 $action = "<div class=\"table-action\">";
-                $action1 = "<a class=\"btn btn-primary details\" data-hidden_id='orden_id' data-modal_detalle='detalle-orden-modal' 
-			    	data-id=\"" . $val['orden_id'] . "\" href=\"#no\">" . t("Detalle") . "</a>";
+                $action1 = "<a class=\"btn btn-primary details\" data-hidden_id='orden_id' data-modal_detalle='detalle-orden-modal'
+            data-id=\"" . $val['orden_id'] . "\" href=\"#no\">" . t("Detalle") . "</a>";
 
 
                 $action .= $action1;
@@ -478,9 +477,9 @@ class AjaxController extends CController {
 
                 $status = "<span class=\"tag " . $val['estado'] . " \">" . Driver::t($val['estado']) . "</span>";
                 $action = "<div class=\"table-action\">";
-                $action1 = "<a class=\"btn btn-primary details\" data-hidden_id='orden_id' data-modal_detalle='detalle-orden-modal' 
-			    	data-id=\"" . $val['orden_id'] . "\" href=\"#no\">" . t("Detalle") . "</a>". "&nbsp;|&nbsp;" . "<a class=\"btn btn-success edit_t\" data-hidden_id='orden_id' data-modal_new='new-orden'
-			    	data-id=\"" . $val['orden_id'] . "\" href=\"#no\">" . "<i class='fa fa-edit' aria-hidden='true'></i>" . "</a>";
+                $action1 = "<a class=\"btn btn-primary details\" data-hidden_id='orden_id' data-modal_detalle='detalle-orden-modal'
+            data-id=\"" . $val['orden_id'] . "\" href=\"#no\">" . t("Detalle") . "</a>". "&nbsp;|&nbsp;" . "<a class=\"btn btn-success edit_t\" data-hidden_id='orden_id' data-modal_new='new-orden'
+            data-id=\"" . $val['orden_id'] . "\" href=\"#no\">" . "<i class='fa fa-edit' aria-hidden='true'></i>" . "</a>";
 
 
                 $action .= $action1;
@@ -535,20 +534,20 @@ class AjaxController extends CController {
         $and = '';
 
         $stmt = "SELECT SQL_CALC_FOUND_ROWS o.*,z_destino.zona AS 'zona_destino_nombre',z_origen.zona AS 'zona_origen_nombre',l_destino.nombre AS 'ciudad_destino',l_origen.nombre AS 'ciudad_origen'
-		,CONCAT(c.nombre,' ',c.apellido) AS nombres
+    ,CONCAT(c.nombre,' ',c.apellido) AS nombres
                 FROM
-		{{orden}} o
+    {{orden}} o
                 INNER JOIN {{zonas}} z_destino on o.zona_destino=z_destino.id
                 INNER JOIN {{locacion}} l_destino on z_destino.id_locacion=l_destino.id
                 INNER JOIN {{zonas}} z_origen on o.zona_origen=z_origen.id
                 INNER JOIN {{locacion}} l_origen on z_origen.id_locacion=l_origen.id
                 LEFT OUTER JOIN {{clientes}} c on c.id_cliente=o.id_cliente
-		WHERE 1		
-		$and
-		$sWhere
-		ORDER BY o.date_created DESC 
+    WHERE 1
+    $and
+    $sWhere
+    ORDER BY o.date_created DESC
                 $sLimit;
-		";
+    ";
         if (isset($_GET['debug'])) {
             dump($stmt);
         }
@@ -583,8 +582,8 @@ class AjaxController extends CController {
                 $status = "<span class=\"tag " . $val['estado'] . " \">" . Driver::t($val['estado']) . "</span>";
                 $action = "<div class=\"table-action\">";
                 $action1 = "<a class=\"btn btn-primary details\" data-hidden_id='orden_id' data-modal_detalle='detalle-orden-modal'
-			    	data-id=\"" . $val['orden_id'] . "\" href=\"#no\">" . t("Detalle") . "</a>";
-                $clipboard = "<a title='Click para copiar en el portapapeles datos de orden' class=\"btn btn-success clipboard\" data-id=\"" . $val['orden_id'] . "\" href=\"#no\"><i class='fa fa-copy'></i></a>"; 
+            data-id=\"" . $val['orden_id'] . "\" href=\"#no\">" . t("Detalle") . "</a>";
+                $clipboard = "<a title='Click para copiar en el portapapeles datos de orden' class=\"btn btn-success clipboard\" data-id=\"" . $val['orden_id'] . "\" href=\"#no\"><i class='fa fa-copy'></i></a>";
 
                 $action .= $action1;
                 $action1 .= "&nbsp;|&nbsp;";
@@ -697,22 +696,22 @@ class AjaxController extends CController {
         }
 
         $stmt = "SELECT SQL_CALC_FOUND_ROWS o.*,z_destino.zona AS 'zona_destino_nombre',z_origen.zona AS 'zona_origen_nombre',l_destino.nombre AS 'ciudad_destino',l_origen.nombre AS 'ciudad_origen'
-		,CONCAT(c.nombre,' ',c.apellido) AS nombres,m.id_mensajero 
+    ,CONCAT(c.nombre,' ',c.apellido) AS nombres,m.id_mensajero
                 FROM
-		{{orden}} o
+    {{orden}} o
                 INNER JOIN {{zonas}} z_destino on o.zona_destino=z_destino.id
                 INNER JOIN {{locacion}} l_destino on z_destino.id_locacion=l_destino.id
                 INNER JOIN {{zonas}} z_origen on o.zona_origen=z_origen.id
                 INNER JOIN {{locacion}} l_origen on z_origen.id_locacion=l_origen.id
                  LEFT OUTER JOIN {{clientes}} c on c.id_cliente=o.id_cliente
-                 LEFT OUTER JOIN {{ruta}} r on o.id_ruta=r.id_ruta  
-                 LEFT OUTER JOIN {{mensajero}} m on r.id_mensajero=m.id_mensajero 
-		WHERE 1		
-		$and
-		$sWhere
-		ORDER BY o.date_created DESC 
+                 LEFT OUTER JOIN {{ruta}} r on o.id_ruta=r.id_ruta
+                 LEFT OUTER JOIN {{mensajero}} m on r.id_mensajero=m.id_mensajero
+    WHERE 1
+    $and
+    $sWhere
+    ORDER BY o.date_created DESC
                 $sLimit;
-		";
+    ";
         if (isset($_GET['debug'])) {
             dump($stmt);
         }
@@ -746,8 +745,8 @@ class AjaxController extends CController {
                 ));
                 $selecciona .= "</div>";
                 $action = "<div>";
-                $action1 = "<a class=\"btn btn-primary details\" data-hidden_id='orden_id' data-modal_detalle='detalle-orden-modal' 
-			    	data-id=\"" . $val['orden_id'] . "\" href=\"#no\">" . t("Detalle") . "</a>";
+                $action1 = "<a class=\"btn btn-primary details\" data-hidden_id='orden_id' data-modal_detalle='detalle-orden-modal'
+            data-id=\"" . $val['orden_id'] . "\" href=\"#no\">" . t("Detalle") . "</a>";
 
                     //aquí
                 $clipboard = "<a title='Click para copiar en el portapapeles datos de orden' class=\"btn btn-success clipboard\" data-id=\"" . $val['orden_id'] . "\" href=\"#no\"><i class='fa fa-copy'></i></a>"; //aqui
@@ -834,8 +833,8 @@ class AjaxController extends CController {
                 ));
                 $selecciona .= "</div>";
                 $action = "<div>";
-                $action1 = "<a class=\"btn btn-primary details\" data-hidden_id='orden_id' data-modal_detalle='detalle-orden-modal' 
-			    	data-id=\"" . $val['orden_id'] . "\" href=\"#no\">" . t("Detalle") . "</a>";
+                $action1 = "<a class=\"btn btn-primary details\" data-hidden_id='orden_id' data-modal_detalle='detalle-orden-modal'
+            data-id=\"" . $val['orden_id'] . "\" href=\"#no\">" . t("Detalle") . "</a>";
 
 
                 $clipboard = "<a title='Click para copiar en el portapapeles datos de orden' class=\"btn btn-success clipboard\" data-id=\"" . $val['orden_id'] . "\" href=\"#no\"><i class='fa fa-copy'></i></a>"; //aqui
@@ -905,7 +904,7 @@ class AjaxController extends CController {
                 /* get task history */
                 $history_details = array();
                 $history_data = array();
-                //if ( $info=Driver::getTaskId($this->data['id'])){		
+                //if ( $info=Driver::getTaskId($this->data['id'])){
 
                 if ($info = $res) {
                     if ($history_details = Driver::getHistorialOrdenes($this->data['orden_id'])) {
@@ -1246,11 +1245,11 @@ class AjaxController extends CController {
                 $wherefield = $this->data['whereid'];
                 $tbl = $this->data['tbl'];
                 $stmt = "
-			DELETE FROM
-			{{{$tbl}}}
-			WHERE
-			$wherefield=" . Driver::q($this->data['id']) . "
-			";
+      DELETE FROM
+      {{{$tbl}}}
+      WHERE
+      $wherefield=" . Driver::q($this->data['id']) . "
+      ";
                 //dump($stmt);
                 $DbExt = new DbExt;
                 $DbExt->qry($stmt);
@@ -1289,15 +1288,15 @@ class AjaxController extends CController {
         $and = '';
 
 
-        $stmt = "SELECT SQL_CALC_FOUND_ROWS a.*,CONCAT(a.nombre,' ',a.apellido) AS nombres 
-		FROM
-		{{mensajero}} a
-		WHERE 1		
-		$and
-		$sWhere
-		$sOrder
-		$sLimit
-		";
+        $stmt = "SELECT SQL_CALC_FOUND_ROWS a.*,CONCAT(a.nombre,' ',a.apellido) AS nombres
+    FROM
+    {{mensajero}} a
+    WHERE 1
+    $and
+    $sWhere
+    $sOrder
+    $sLimit
+    ";
         if (isset($_GET['debug'])) {
             dump($stmt);
         }
@@ -1341,8 +1340,8 @@ class AjaxController extends CController {
                 $p = "id=$id" . "&tbl=mensajero&whereid=id_mensajero";
                 $status = "<span class=\"tag " . $val['status'] . " \">" . Driver::t($val['status']) . "</span>";
                 $action = "<div>";
-                $action1 = "<a class=\"btn btn-primary edit-mensajero\"  data-id_mensajero=\"$id\" 
-			    class=\"table-edit\" href=\"#no\">" . Driver::t("Editar") . "</a>";
+                $action1 = "<a class=\"btn btn-primary edit-mensajero\"  data-id_mensajero=\"$id\"
+          class=\"table-edit\" href=\"#no\">" . Driver::t("Editar") . "</a>";
                 $action1 .= "&nbsp;|&nbsp;";
                 $action1 .= "<a class=\"btn btn-danger delete\"  data-data=\"$p\"  data-id=\"$id\" class=\"table-delete\" href=\"#no\">" . Driver::t("Eliminar") . "</a>";
 
@@ -1493,15 +1492,15 @@ class AjaxController extends CController {
         $and = '';
 
         $stmt = "SELECT SQL_CALC_FOUND_ROWS r.*
-		,CONCAT(m.nombre,' ',m.apellido) AS nombres,m.foto_perfil,m.cv 
+    ,CONCAT(m.nombre,' ',m.apellido) AS nombres,m.foto_perfil,m.cv
                 FROM
                 {{ruta}} r
                 LEFT OUTER JOIN {{mensajero}} m on r.id_mensajero=m.id_mensajero
-		WHERE 1		
-		$and
-		$sWhere
-		ORDER BY r.fecha_ruta DESC limit 5000;
-		";
+    WHERE 1
+    $and
+    $sWhere
+    ORDER BY r.fecha_ruta DESC limit 5000;
+    ";
         if (isset($_GET['debug'])) {
             dump($stmt);
         }
@@ -1528,7 +1527,7 @@ class AjaxController extends CController {
                 $status = "<span class=\"tag " . $val['status'] . " \">" . Driver::t($val['status']) . "</span>";
                 $action = "<div class=\"table-action\">";
                 $action1 = "<a class=\"btn btn-primary details\" data-hidden_id='id_ruta' data-modal_detalle='detalle-ruta-modal'
-			    	data-id=\"" . $val['id_ruta'] . "\" href=\"#no\">" . t("Detalle") . "</a>";
+            data-id=\"" . $val['id_ruta'] . "\" href=\"#no\">" . t("Detalle") . "</a>";
 
 
                 $action .= $action1;
@@ -1619,15 +1618,15 @@ class AjaxController extends CController {
         }
 
         $stmt = "SELECT SQL_CALC_FOUND_ROWS r.*
-		,CONCAT(m.nombre,' ',m.apellido) AS nombres,m.foto_perfil,m.cv 
+    ,CONCAT(m.nombre,' ',m.apellido) AS nombres,m.foto_perfil,m.cv
                 FROM
                 {{ruta}} r
                 LEFT OUTER JOIN {{mensajero}} m on r.id_mensajero=m.id_mensajero
-		WHERE 1		
-		$and
-		$sWhere
-		ORDER BY r.fecha_ruta DESC limit 5000;
-		";
+    WHERE 1
+    $and
+    $sWhere
+    ORDER BY r.fecha_ruta DESC limit 5000;
+    ";
         if (isset($_GET['debug'])) {
             dump($stmt);
         }
@@ -1654,7 +1653,7 @@ class AjaxController extends CController {
                 $status = "<span class=\"tag " . $val['status'] . " \">" . Driver::t($val['status']) . "</span>";
                 $action = "<div class=\"table-action\">";
                 $action1 = "<a class=\"btn btn-primary details\" data-hidden_id='id_ruta' data-modal_detalle='detalle-ruta-modal'
-			    	data-id=\"" . $val['id_ruta'] . "\" href=\"#no\">" . t("Detalle") . "</a>";
+            data-id=\"" . $val['id_ruta'] . "\" href=\"#no\">" . t("Detalle") . "</a>";
 
 
                 $action .= $action1;
@@ -1752,20 +1751,20 @@ class AjaxController extends CController {
         $and = " AND o.id_ruta =" . $_GET["id_ruta"];
 
         $stmt = "SELECT SQL_CALC_FOUND_ROWS o.*,z_destino.zona AS 'zona_destino_nombre',z_origen.zona AS 'zona_origen_nombre',l_destino.nombre AS 'ciudad_destino',l_origen.nombre AS 'ciudad_origen'
-		,CONCAT(c.nombre,' ',c.apellido) AS nombres
+    ,CONCAT(c.nombre,' ',c.apellido) AS nombres
                 FROM
-		{{orden}} o
+    {{orden}} o
                 INNER JOIN {{zonas}} z_destino on o.zona_destino=z_destino.id
                 INNER JOIN {{locacion}} l_destino on z_destino.id_locacion=l_destino.id
                 INNER JOIN {{zonas}} z_origen on o.zona_origen=z_origen.id
                 INNER JOIN {{locacion}} l_origen on z_origen.id_locacion=l_origen.id
                 LEFT OUTER JOIN {{clientes}} c on c.id_cliente=o.id_cliente
-		WHERE 1		
-		$and
-		$sWhere
-		ORDER BY o.date_created DESC 
+    WHERE 1
+    $and
+    $sWhere
+    ORDER BY o.date_created DESC
                 $sLimit;
-		";
+    ";
         if (isset($_GET['debug'])) {
             dump($stmt);
         }
@@ -1792,7 +1791,7 @@ class AjaxController extends CController {
                 $status = "<span class=\"tag " . $val['estado'] . " \">" . Driver::t($val['estado']) . "</span>";
                 $action = "<div class=\"table-action\">";
                 $action1 = "<a class=\"btn btn-primary details\" data-hidden_id='orden_id' data-modal_detalle='detalle-orden-modal'
-			    	data-id=\"" . $val['orden_id'] . "\" href=\"#no\">" . t("Detalle") . "</a>";
+            data-id=\"" . $val['orden_id'] . "\" href=\"#no\">" . t("Detalle") . "</a>";
 
 
                 $action .= $action1;
@@ -1898,22 +1897,22 @@ class AjaxController extends CController {
         }
 
         $stmt = "SELECT SQL_CALC_FOUND_ROWS o.*,z_destino.zona AS 'zona_destino_nombre',z_origen.zona AS 'zona_origen_nombre',l_destino.nombre AS 'ciudad_destino',l_origen.nombre AS 'ciudad_origen'
-		,CONCAT(c.nombre,' ',c.apellido) AS nombres,m.id_mensajero
+    ,CONCAT(c.nombre,' ',c.apellido) AS nombres,m.id_mensajero
                 FROM
-		{{orden}} o
+    {{orden}} o
                 INNER JOIN {{zonas}} z_destino on o.zona_destino=z_destino.id
                 INNER JOIN {{locacion}} l_destino on z_destino.id_locacion=l_destino.id
                 INNER JOIN {{zonas}} z_origen on o.zona_origen=z_origen.id
                 INNER JOIN {{locacion}} l_origen on z_origen.id_locacion=l_origen.id
                 LEFT OUTER JOIN {{clientes}} c on c.id_cliente=o.id_cliente
-                INNER JOIN {{ruta}} r on o.id_ruta=r.id_ruta  
-                INNER JOIN {{mensajero}} m on r.id_mensajero=m.id_mensajero 
-		WHERE 1		
-		$and
-		$sWhere
-		ORDER BY o.date_created DESC 
+                INNER JOIN {{ruta}} r on o.id_ruta=r.id_ruta
+                INNER JOIN {{mensajero}} m on r.id_mensajero=m.id_mensajero
+    WHERE 1
+    $and
+    $sWhere
+    ORDER BY o.date_created DESC
                 $sLimit;
-		";
+    ";
         if (isset($_GET['debug'])) {
             dump($stmt);
         }
@@ -1939,7 +1938,7 @@ class AjaxController extends CController {
                 $status = "<span class=\"tag " . $val['estado'] . " \">" . Driver::t($val['estado']) . "</span>";
                 $action = "<div class=\"table-action\">";
                 $action1 = "<a class=\"btn btn-primary details\" data-hidden_id='orden_id' data-modal_detalle='detalle-orden-modal'
-			    	data-id=\"" . $val['orden_id'] . "\" href=\"#no\">" . t("Detalle") . "</a>";
+            data-id=\"" . $val['orden_id'] . "\" href=\"#no\">" . t("Detalle") . "</a>";
 
 
                 $action .= $action1;
@@ -2313,14 +2312,14 @@ class AjaxController extends CController {
 
 
         $stmt = "SELECT SQL_CALC_FOUND_ROWS c.*
-		FROM
-		{{clientes}} c 
-		WHERE 1		
-		$and
-		$sWhere
-		$sOrder
-		$sLimit
-		";
+    FROM
+    {{clientes}} c
+    WHERE 1
+    $and
+    $sWhere
+    $sOrder
+    $sLimit
+    ";
         if (isset($_GET['debug'])) {
             dump($stmt);
         }
@@ -2345,11 +2344,11 @@ class AjaxController extends CController {
                 $p = "id=$id" . "&tbl=clientes&whereid=id_cliente";
                 $status = "<span class=\"tag " . $val['status'] . " \">" . Driver::t($val['status']) . "</span>";
                 $action = "<div>";
-                $action1 = "<a class=\"btn btn-primary edit-cliente\"  data-id='" . $id . "' 
-			    class=\"table-edit\" href=\"#no\">" . Driver::t("Editar") . "</a>";
+                $action1 = "<a class=\"btn btn-primary edit-cliente\"  data-id='" . $id . "'
+          class=\"table-edit\" href=\"#no\">" . Driver::t("Editar") . "</a>";
                 $action1 .= "&nbsp;|&nbsp;<br/>";
-                $action1 .= "<a class=\"btn btn-success resetea-password-cliente\"  data-id='" . $id . "' 
-			    class=\"table-edit\" href=\"#no\">" . Driver::t("Resetea Password") . "</a>";
+                $action1 .= "<a class=\"btn btn-success resetea-password-cliente\"  data-id='" . $id . "'
+          class=\"table-edit\" href=\"#no\">" . Driver::t("Resetea Password") . "</a>";
                 $action1 .= "&nbsp;|&nbsp;<br/>";
                 $action1 .= "<a class=\"btn btn-danger delete\"  data-data='" . $p . "'   data-id='" . $id . "'  class=\"table-delete\" href=\"#no\">" . Driver::t("Eliminar") . "</a>";
 
@@ -2398,14 +2397,14 @@ class AjaxController extends CController {
 
 
         $stmt = "SELECT SQL_CALC_FOUND_ROWS u.*
-		FROM
-		{{usuario}} u
-		WHERE 1		
-		$and
-		$sWhere
-		$sOrder
-		$sLimit
-		";
+    FROM
+    {{usuario}} u
+    WHERE 1
+    $and
+    $sWhere
+    $sOrder
+    $sLimit
+    ";
         if (isset($_GET['debug'])) {
             dump($stmt);
         }
@@ -2430,11 +2429,11 @@ class AjaxController extends CController {
                 $p = "id=$id" . "&tbl=usuario&whereid=id";
                 $status = "<span class=\"tag " . $val['status'] . " \">" . Driver::t($val['status']) . "</span>";
                 $action = "<div>";
-                $action1 = "<a class=\"btn btn-primary edit-usuario\"  data-id='" . $id . "' 
-			    class=\"table-edit\" href=\"#no\">" . Driver::t("Editar") . "</a>";
+                $action1 = "<a class=\"btn btn-primary edit-usuario\"  data-id='" . $id . "'
+          class=\"table-edit\" href=\"#no\">" . Driver::t("Editar") . "</a>";
                 $action1 .= "&nbsp;|&nbsp;<br/>";
-                $action1 .= "<a class=\"btn btn-success resetea-password-usuario\"  data-id='" . $id . "' 
-			    class=\"table-edit\" href=\"#no\">" . Driver::t("Resetea Password") . "</a>";
+                $action1 .= "<a class=\"btn btn-success resetea-password-usuario\"  data-id='" . $id . "'
+          class=\"table-edit\" href=\"#no\">" . Driver::t("Resetea Password") . "</a>";
                 $action1 .= "&nbsp;|&nbsp;<br/>";
                 if ($val['email'] != "admin@web-cargoxpress.com")
                     $action1 .= "<a class=\"btn btn-danger delete\"  data-data='" . $p . "'   data-id='" . $id . "'  class=\"table-delete\" href=\"#no\">" . Driver::t("Eliminar") . "</a>";
@@ -2733,16 +2732,16 @@ class AjaxController extends CController {
         $and = '';
         $sOrder = ' ORDER BY z.zona ASC, z.zona_padre ASC ';
 
-        $stmt = "SELECT SQL_CALC_FOUND_ROWS z.*,l.nombre AS ciudad 
-		FROM
-		{{zonas}} z
+        $stmt = "SELECT SQL_CALC_FOUND_ROWS z.*,l.nombre AS ciudad
+    FROM
+    {{zonas}} z
                 INNER JOIN {{locacion}} l on z.id_locacion=l.id
-		WHERE 1		
-		$and
-		$sWhere
-		$sOrder
-		$sLimit
-		";
+    WHERE 1
+    $and
+    $sWhere
+    $sOrder
+    $sLimit
+    ";
         if (isset($_GET['debug'])) {
             dump($stmt);
         }
@@ -2768,8 +2767,8 @@ class AjaxController extends CController {
                 $id = $val['id'];
                 $p = "id=$id" . "&tbl=zonas&whereid=id";
                 $action = "<div>";
-                $action1 = "<a class=\"btn btn-primary edit-zona\"  data-id_zona=\"$id\" 
-			    class=\"table-edit\" href=\"#no\">" . Driver::t("Editar") . "</a>";
+                $action1 = "<a class=\"btn btn-primary edit-zona\"  data-id_zona=\"$id\"
+          class=\"table-edit\" href=\"#no\">" . Driver::t("Editar") . "</a>";
                 $action1 .= "&nbsp;|&nbsp;";
                 $action1 .= "<a class=\"btn btn-danger delete\"  data-data=\"$p\"  data-id=\"$id\" class=\"table-delete\" href=\"#no\">" . Driver::t("Eliminar") . "</a>";
 
@@ -2855,15 +2854,15 @@ class AjaxController extends CController {
         $sOrder = ' ORDER BY l.nombre ASC ';
 
         $stmt = "SELECT SQL_CALC_FOUND_ROWS l.*, l2.nombre as 'provincia'
-		FROM
-		{{locacion}} l 
+    FROM
+    {{locacion}} l
                 LEFT OUTER JOIN {{locacion}} l2 on l.id_padre=l2.id
-		WHERE 1		
-		$and
-		$sWhere
-		$sOrder
-		$sLimit
-		";
+    WHERE 1
+    $and
+    $sWhere
+    $sOrder
+    $sLimit
+    ";
         if (isset($_GET['debug'])) {
             dump($stmt);
         }
@@ -2889,8 +2888,8 @@ class AjaxController extends CController {
                 $id = $val['id'];
                 $p = "id=$id" . "&tbl=locacion&whereid=id";
                 $action = "<div>";
-                $action1 = "<a class=\"btn btn-primary edit-locacion\"  data-id_locacion=\"$id\" 
-			    class=\"table-edit\" href=\"#no\">" . Driver::t("Editar") . "</a>";
+                $action1 = "<a class=\"btn btn-primary edit-locacion\"  data-id_locacion=\"$id\"
+          class=\"table-edit\" href=\"#no\">" . Driver::t("Editar") . "</a>";
                 $action1 .= "&nbsp;|&nbsp;";
                 $action1 .= "<a class=\"btn btn-danger delete\"  data-data=\"$p\"  data-id=\"$id\" class=\"table-delete\" href=\"#no\">" . Driver::t("Eliminar") . "</a>";
 
@@ -3205,7 +3204,7 @@ class AjaxController extends CController {
     public function actionSaveTranslation() {
         $mobile_dictionary = '';
         if (is_array($this->data) && count($this->data) >= 1) {
-            //$version=str_replace(".",'',phpversion());					
+            //$version=str_replace(".",'',phpversion());
             $mobile_dictionary = json_encode($this->data);
             $unicode = 3;
         }
@@ -3402,21 +3401,21 @@ class AjaxController extends CController {
 
 
         $stmt = "SELECT SQL_CALC_FOUND_ROWS a.*,
-		(
-		  select concat(first_name,' ',last_name)
-		  from  {{driver}}
-		  where
-		  driver_id=a.driver_id
-		  limit 0,1
-		) as driver_name
-		FROM
-		{{driver_pushlog}} a
-		WHERE 1
-		$and		
-		$sWhere
-		$sOrder
-		$sLimit
-		";
+    (
+      select concat(first_name,' ',last_name)
+      from  {{driver}}
+      where
+      driver_id=a.driver_id
+      limit 0,1
+    ) as driver_name
+    FROM
+    {{driver_pushlog}} a
+    WHERE 1
+    $and
+    $sWhere
+    $sOrder
+    $sLimit
+    ";
         if (isset($_GET['debug'])) {
             dump($stmt);
         }
@@ -3712,18 +3711,18 @@ class AjaxController extends CController {
         $and = '';
         //$and = " AND estado !='entregado' ";
 
-        $stmt = "SELECT SQL_CALC_FOUND_ROWS o.*,z.zona AS 'sector',l.nombre AS 'ciudad',CONCAT(c.nombre,' ',c.apellido,' ',c.prefijo) AS nombres 
-		FROM
-		{{contactos}} o
+        $stmt = "SELECT SQL_CALC_FOUND_ROWS o.*,z.zona AS 'sector',l.nombre AS 'ciudad',CONCAT(c.nombre,' ',c.apellido,' ',c.prefijo) AS nombres
+    FROM
+    {{contactos}} o
                 INNER JOIN {{zonas}} z on o.zona=z.id
-                INNER JOIN {{locacion}} l on z.id_locacion=l.id 
-                INNER JOIN {{clientes}} c on o.id_cliente=c.id_cliente  
-		WHERE 1		
-		$and
-		$sWhere
-		ORDER BY o.empresa ASC 
-		limit 20;
-		";
+                INNER JOIN {{locacion}} l on z.id_locacion=l.id
+                INNER JOIN {{clientes}} c on o.id_cliente=c.id_cliente
+    WHERE 1
+    $and
+    $sWhere
+    ORDER BY o.empresa ASC
+    limit 20;
+    ";
         if (isset($_GET['debug'])) {
             dump($stmt);
         }
@@ -3747,7 +3746,7 @@ class AjaxController extends CController {
             foreach ($res as $val) {
                 $action = "<div class=\"table-action\">";
                 $action1 = "<a class=\"btn btn-primary details\" data-hidden_id='contacto_id' data-modal_detalle='detalle-contacto-modal'
-			    	data-id=\"" . $val['contacto_id'] . "\" href=\"#no\">" . t("Detalle") . "</a>";
+            data-id=\"" . $val['contacto_id'] . "\" href=\"#no\">" . t("Detalle") . "</a>";
 
 
                 $action .= $action1;
@@ -3816,17 +3815,17 @@ class AjaxController extends CController {
         }
 
 
-        $stmt = "SELECT SQL_CALC_FOUND_ROWS o.*,z.zona AS 'sector',l.nombre AS 'ciudad',CONCAT(c.nombre,' ',c.apellido,' ',c.prefijo) AS nombres 
-		FROM
-		{{contactos}} o
+        $stmt = "SELECT SQL_CALC_FOUND_ROWS o.*,z.zona AS 'sector',l.nombre AS 'ciudad',CONCAT(c.nombre,' ',c.apellido,' ',c.prefijo) AS nombres
+    FROM
+    {{contactos}} o
                 INNER JOIN {{zonas}} z on o.zona=z.id
-                INNER JOIN {{locacion}} l on z.id_locacion=l.id 
-                INNER JOIN {{clientes}} c on o.id_cliente=c.id_cliente  
-                WHERE 1 
-		$and
-		$sWhere
-		ORDER BY o.empresa ASC;
-		";
+                INNER JOIN {{locacion}} l on z.id_locacion=l.id
+                INNER JOIN {{clientes}} c on o.id_cliente=c.id_cliente
+                WHERE 1
+    $and
+    $sWhere
+    ORDER BY o.empresa ASC;
+    ";
         if (isset($_GET['debug'])) {
             dump($stmt);
         }
@@ -3851,7 +3850,7 @@ class AjaxController extends CController {
             foreach ($res as $val) {
                 $action = "<div class=\"table-action\">";
                 $action1 = "<a class=\"btn btn-primary details\" data-hidden_id='contacto_id' data-modal_detalle='detalle-contacto-modal'
-			    	data-id=\"" . $val['contacto_id'] . "\" href=\"#no\">" . t("Detalle") . "</a>";
+            data-id=\"" . $val['contacto_id'] . "\" href=\"#no\">" . t("Detalle") . "</a>";
 
 
                 $action .= $action1;
@@ -3972,11 +3971,11 @@ class AjaxController extends CController {
             $wherefield = $this->data['whereid'];
             $tbl = $this->data['tbl'];
             $stmt = "
-			DELETE FROM
-			{{{$tbl}}}
-			WHERE
-			$wherefield=" . Driver::q($this->data['id']) . "
-			";
+      DELETE FROM
+      {{{$tbl}}}
+      WHERE
+      $wherefield=" . Driver::q($this->data['id']) . "
+      ";
             //dump($stmt);
             $DbExt = new DbExt;
             $DbExt->qry($stmt);
@@ -4126,15 +4125,15 @@ class AjaxController extends CController {
         $and = " AND customer_id = " . Driver::q(Driver::getUserId()) . " ";
 
 
-        $stmt = "SELECT SQL_CALC_FOUND_ROWS a.*			
-		FROM
-		{{sms_logs}} a
-		WHERE 1
-		$and		
-		$sWhere
-		$sOrder
-		$sLimit
-		";
+        $stmt = "SELECT SQL_CALC_FOUND_ROWS a.*
+    FROM
+    {{sms_logs}} a
+    WHERE 1
+    $and
+    $sWhere
+    $sOrder
+    $sLimit
+    ";
         if (isset($_GET['debug'])) {
             dump($stmt);
         }
@@ -4219,15 +4218,15 @@ class AjaxController extends CController {
         $and = " AND customer_id = " . Driver::q(Driver::getUserId()) . " ";
 
 
-        $stmt = "SELECT SQL_CALC_FOUND_ROWS a.*			
-		FROM
-		{{email_logs}} a
-		WHERE 1
-		$and		
-		$sWhere
-		$sOrder
-		$sLimit
-		";
+        $stmt = "SELECT SQL_CALC_FOUND_ROWS a.*
+    FROM
+    {{email_logs}} a
+    WHERE 1
+    $and
+    $sWhere
+    $sOrder
+    $sLimit
+    ";
         if (isset($_GET['debug'])) {
             dump($stmt);
         }
@@ -4314,21 +4313,21 @@ class AjaxController extends CController {
 
 
         $stmt = "SELECT SQL_CALC_FOUND_ROWS a.*,
-		(
-			select team_name
-			from {{driver_team}}
-			where
-			team_id=a.team_id
-			limit 0,1
-		) as team_name
-		FROM
-		{{push_broadcast}} a
-		WHERE 1
-		$and		
-		$sWhere
-		$sOrder
-		$sLimit
-		";
+    (
+      select team_name
+      from {{driver_team}}
+      where
+      team_id=a.team_id
+      limit 0,1
+    ) as team_name
+    FROM
+    {{push_broadcast}} a
+    WHERE 1
+    $and
+    $sWhere
+    $sOrder
+    $sLimit
+    ";
         if (isset($_GET['debug'])) {
             dump($stmt);
         }
