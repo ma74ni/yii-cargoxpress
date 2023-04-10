@@ -148,7 +148,7 @@ class ScriptManager {
         );
 
         Yii::app()->clientScript->registerScriptFile(
-                Yii::app()->baseUrl . '/assets/app.js?ver=1.1', CClientScript::POS_END
+                Yii::app()->baseUrl . '/assets/app.js?ver=1.2', CClientScript::POS_END
         );
 
         Yii::app()->clientScript->registerScriptFile(
@@ -183,7 +183,7 @@ class ScriptManager {
 
         $cs->registerCssFile($baseUrl . "/assets/raty/jquery.raty.css");
 
-        $cs->registerCssFile($baseUrl . "/assets/user.css?ver=1.0");
+        $cs->registerCssFile($baseUrl . "/assets/user.css?ver=1.1");
 
         $cs->registerCssFile($baseUrl . "/assets/app-responsive.css?ver=1.0");
 
