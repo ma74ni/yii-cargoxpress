@@ -709,8 +709,8 @@ function callAjax(action, params, button) {
                 'checked',
                 true
               );
-            } else if (data.details.tipo_servicio == 'Delivery') {
-              $('input:radio[name="tipo_servicio"][value="Delivery"]').prop(
+            } else if (data.details.tipo_servicio == 'Ilimitado') {
+              $('input:radio[name="tipo_servicio"][value="Ilimitado"]').prop(
                 'checked',
                 true
               );

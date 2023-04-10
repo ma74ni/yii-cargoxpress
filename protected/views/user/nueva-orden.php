@@ -74,7 +74,7 @@ $this->renderPartial('/tpl/menuUser', array(
                                     <?php
                                     echo CHtml::radioButton('tipo_servicio', false, array(
                                         'class' => "tipo_servicio",
-                                        'value' => "Delivery"
+                                        'value' => "Ilimitado"
                                     ));
                                     ?>
                                     <span><?php echo Driver::t("Iimitado") ?></span>
