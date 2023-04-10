@@ -1689,7 +1689,7 @@ function initTableTodasOrdenes() {
   }
 
   data_table = $('#table_list').dataTable({
-    iDisplayLength: 20,
+    iDisplayLength: 100,
     bProcessing: true,
     bServerSide: true,
     sAjaxSource:
@@ -1742,7 +1742,7 @@ function initTableTodasOrdenesBusquedaAvanzada() {
   }
 
   data_table = $('#table_list').dataTable({
-    iDisplayLength: 20,
+    iDisplayLength: 100,
     bProcessing: true,
     bServerSide: true,
     sAjaxSource:
@@ -1795,7 +1795,7 @@ function reinitTableTodasOrdenesBusquedaAvanzada() {
   }
 
   data_table = $('#table_list').dataTable({
-    iDisplayLength: 20,
+    iDisplayLength: 100,
     bProcessing: true,
     bServerSide: true,
     sAjaxSource:
@@ -1849,7 +1849,7 @@ function initTable() {
   }
 
   data_table = $('#table_list').dataTable({
-    iDisplayLength: 20,
+    iDisplayLength: 100,
     bProcessing: true,
     bServerSide: true,
     sAjaxSource:
