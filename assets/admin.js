@@ -286,7 +286,7 @@ function initTable()
 	var params=$("#frm_table").serialize();	
 	params+="&language="+language;
 	 data_table = $('#table_list').dataTable({
-    	   "iDisplayLength": 15,
+    	   "iDisplayLength": 100,
 	       "bProcessing": true, 	       
 	       "bServerSide": true,
 	       "bLengthChange": false,

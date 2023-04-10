@@ -119,7 +119,7 @@ function initTableLocacion()
     }
 
     data_table = $('#table_list1').dataTable({
-        "iDisplayLength": 20,
+        "iDisplayLength": 100,
         "bProcessing": true,
         "bServerSide": true,
         "sAjaxSource": ajax_url + "/" + action + "/?currentController=admin&" + params,

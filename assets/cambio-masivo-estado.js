@@ -161,7 +161,7 @@ $(document).ready(function () {
     }
 
     data_table = $('#table_list').dataTable({
-      iDisplayLength: 20,
+      iDisplayLength: 100,
       bProcessing: true,
       bServerSide: true,
       sAjaxSource:
@@ -219,7 +219,7 @@ $(document).ready(function () {
     }
 
     data_table = $('#table_list').dataTable({
-      iDisplayLength: 20,
+      iDisplayLength: 100,
       bProcessing: true,
       bServerSide: true,
       sAjaxSource:
@@ -275,7 +275,7 @@ $(document).ready(function () {
     }
 
     data_table = $('#table_list').dataTable({
-      iDisplayLength: 20,
+      iDisplayLength: 100,
       bProcessing: true,
       bServerSide: true,
       sAjaxSource:
