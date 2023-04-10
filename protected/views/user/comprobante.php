@@ -7,7 +7,8 @@
   <style>
     @media print {
       body {
-        width: 21cm;
+        width: 210mm;
+        height: 297mm;
         margin: 0;
 
         /* change the margins as you want them to be. */
@@ -15,7 +16,8 @@
 
 
       .invoice-box {
-        width: 21cm;
+        width: 210mm;
+        height: 297mm;
         margin: 20px 0 0 0;
         border: 1px solid #eee;
         box-shadow: 0 0 0px rgba(0, 0, 0, .15);
@@ -82,7 +84,8 @@
     }
 
     .invoice-box {
-      width: 21cm;
+      width: 210mm;
+      height: 297mm;
       margin: 20px 0 0 0;
       border: 1px solid #eee;
       box-shadow: 0 0 0px rgba(0, 0, 0, .15);
