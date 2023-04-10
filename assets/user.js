@@ -1149,7 +1149,7 @@ function initTableOrdenesUser() {
   }
 
   data_table = $('#table_list_mn').dataTable({
-    iDisplayLength: 20,
+    iDisplayLength: 100,
     bProcessing: true,
     bServerSide: true,
     sAjaxSource:
