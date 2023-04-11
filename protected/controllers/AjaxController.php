@@ -744,23 +744,18 @@ class AjaxController extends CController {
                             'value' => $val['orden_id']
                 ));
                 $selecciona .= "</div>";
-                $action = "<div>";
+                $action = "<div class=\"s\">";
                 $action1 = "<a class=\"btn btn-primary details\" data-hidden_id='orden_id' data-modal_detalle='detalle-orden-modal'
-            data-id=\"" . $val['orden_id'] . "\" href=\"#no\">" . t("Detalle") . "</a>";
-
-                    //aquí
-                $clipboard = "<a title='Click para copiar en el portapapeles datos de orden' class=\"btn btn-success clipboard\" data-id=\"" . $val['orden_id'] . "\" href=\"#no\"><i class='fa fa-copy'></i></a>"; //aqui
+            data-id=\"" . $val['orden_id'] . "\" href=\"#no\">" . t("Detalle") . "</a>" . "&nbsp;|&nbsp;"
+                  . "<a title='Click para copiar en el portapapeles datos de orden' class=\"btn btn-success clipboard\" data-id=\"" . $val['orden_id'] . "\" href=\"#no\"><i class='fa fa-copy'></i></a>"  . "&nbsp;|&nbsp;" . "<a class=\"btn btn-primary edit_t\" title=\"Editar\" data-hidden_id='orden_id' data-modal_new='new-orden'
+            data-id=\"" . $val['orden_id'] . "\" href=\"#no\">" . "<i class='fa fa-edit' aria-hidden='true'></i>" . "</a>";
 
                 $action .= $action1;
-                $action1 .= "&nbsp;|&nbsp;";
-                $action1 .= $clipboard;
-                $action .= "&nbsp;|&nbsp;";
                 $action .= "</div>";
-
 
                 $feed_data['aaData'][] = array(
                     $selecciona,
-                    $val['codigo_orden'] . $action,
+                    $val['codigo_orden'],
                     $val['origen'],
                     $val['direccion_origen'],
                     $val['destino'],

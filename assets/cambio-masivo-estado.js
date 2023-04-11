@@ -170,11 +170,29 @@ $(document).ready(function () {
       sPaginationType: 'full_numbers',
       responsive: true,
       //"bFilter":false,
+      columns: [
+        { orderable: false },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        { orderable: false },
+        null
+      ],
       bLengthChange: false,
       oLanguage: {
         sProcessing:
           '<p>Procesando.. <i class="fa fa-spinner fa-spin"></i></p>',
       },
+      aoColumnDefs: [
+        {
+          bSortable: false,
+          aTargets: [ -1 ]
+        }
+      ],
       oLanguage: {
         sEmptyTable: js_lang.tablet_1,
         sInfo: js_lang.tablet_2,
@@ -228,11 +246,29 @@ $(document).ready(function () {
       sPaginationType: 'full_numbers',
       responsive: true,
       //"bFilter":false,
+      columns: [
+        { orderable: false },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        { orderable: false },
+        null
+      ],
       bLengthChange: false,
       oLanguage: {
         sProcessing:
           '<p>Procesando.. <i class="fa fa-spinner fa-spin"></i></p>',
       },
+      aoColumnDefs: [
+        {
+          bSortable: false,
+          aTargets: [ -1 ]
+        }
+      ],
       oLanguage: {
         sEmptyTable: js_lang.tablet_1,
         sInfo: js_lang.tablet_2,
@@ -284,11 +320,29 @@ $(document).ready(function () {
       sPaginationType: 'full_numbers',
       responsive: true,
       //"bFilter":false,
+      columns: [
+        { orderable: false },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        { orderable: false },
+        null
+      ],
       bLengthChange: false,
       oLanguage: {
         sProcessing:
           '<p>Procesando.. <i class="fa fa-spinner fa-spin"></i></p>',
       },
+      aoColumnDefs: [
+        {
+          bSortable: false,
+          aTargets: [ -1 ]
+        }
+      ],
       oLanguage: {
         sEmptyTable: js_lang.tablet_1,
         sInfo: js_lang.tablet_2,
