@@ -795,7 +795,6 @@ class AppController extends CController {
 
         $stmt = isset($_SESSION['xpress_stmt_pedidosTodosMasivoEstadoList']) ? $_SESSION['xpress_stmt_pedidosTodosMasivoEstadoList'] : '';
 
-
         if (!empty($stmt)) {
             // $pos = strpos($stmt, "LIMIT");
             // $stmt = substr($stmt, 0, $pos);
@@ -808,50 +807,50 @@ class AppController extends CController {
                     $date_created = Yii::app()->functions->prettyDate($val['o.date_created'], true);
                     $fecha_entrega = Yii::app()->functions->prettyDate($val['fecha_entrega'], true);
                     $data[] = array(
-                        $val['codigo_orden'],
-                        $val['tipo_servicio'],
-                        $val['nombres'],
-                        $val['origen'],
-                        $val['remitente'],
-                        $val['telefono_remitente'],
-                        $val['ciudad_origen'],
-                        $val['direccion_origen'],
-                        $val['zona_origen_nombre'],
-                        $val['destino'],
-                        $val['recibe'],
-                        $val['telefono_recibe'],
-                        $val['ciudad_destino'],
-                        $val['direccion_destino'],
-                        $val['zona_destino_nombre'],
-                        $date_created,
-                        $fecha_envio,
-                        $fecha_entrega,
-                        $val['detalle'],
-                        $val['estado']
+                      $val['codigo_orden'],
+                      $val['nombres'],
+
+                      $val['origen'],
+                      $val['remitente'],
+                      $val['telefono_remitente'],
+                      $val['ciudad_origen'],
+
+                      $val['destino'],
+                      $val['recibe'],
+                      $val['telefono_recibe'],
+                      $val['ciudad_destino'],
+
+                      $val['detalle'],
+                      $date_created,
+                      $val['estado'],
+                      $val['tipo_servicio'],
+
+                      $val['peso'],
+                      $val['no_gestiones'],
+                      $val['tarifa'],
+                      $val['costo'],
                     );
                 }
 
                 $header = array(
-                    driver::t("ID"),
-                    driver::t("Tipo Servicio"),
-                    driver::t("Cliente"),
-                    driver::t("Origen"),
-                    driver::t("Remitente"),
-                    driver::t("Telefono Remitente"),
-                    driver::t("Ciudad Origen"),
-                    driver::t("Direccion Origen"),
-                    driver::t("Zona Origen"),
-                    driver::t("Destino"),
-                    driver::t("Recibe"),
-                    driver::t("Telefono Recibe"),
-                    driver::t("Ciudad Destino"),
-                    driver::t("Direccion Destino"),
-                    driver::t("Zona Destino"),
-                    driver::t("Fecha Creacion"),
-                    driver::t("Fecha Envio"),
-                    driver::t("Fecha Entrega"),
-                    driver::t("Detalle"),
-                    driver::t("Estado"),
+                  driver::t("ID Código de guía"),
+                  driver::t("Cliente"),
+                  driver::t("Origen"),
+                  driver::t("Remitente"),
+                  driver::t("Teléfono"),
+                  driver::t("Ciudad Origen"),
+                  driver::t("Destino"),
+                  driver::t("Recibe"),
+                  driver::t("Teléfono"),
+                  driver::t("Ciudad Destino"),
+                  driver::t("Indicaciones"),
+                  driver::t("Fecha y Hora de Creación"),
+                  driver::t("Estado del Envío"),
+                  driver::t("Tipo Servicio"),
+                  driver::t("Peso"),
+                  driver::t("Gestiones"),
+                  driver::t("Tarifa"),
+                  driver::t("Costo"),
                 );
 
                 $filename = 'ordenes-' . date('c') . '.csv';
