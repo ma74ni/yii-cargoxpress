@@ -16,7 +16,7 @@
 
                 <ul id="tabs"> 
                     <li class="active"><?php echo Driver::t("Detalle") ?></li>
-                    <li><?php echo Driver::t("Actividades") ?></li>
+                    <li><?php echo Driver::t("Seguimiento") ?></li>
                     <!--<li><?php echo Driver::t("Order Details") ?></li>-->
                     <!--<li><?php echo Driver::t("Path History") ?></li>-->
                 </ul>
